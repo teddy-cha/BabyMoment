@@ -19,7 +19,7 @@ import afterteam.com.babymoment.utils.LogUtils;
 /**
  * After verifying that a valid session
  * It calls the ME, Check whether your subscription is drawn to the signup page or move to the Main page.
- *
+ * @author chayongbin
  */
 public class BaseSignupActivity extends Activity {
 

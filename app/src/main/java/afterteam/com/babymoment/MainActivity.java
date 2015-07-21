@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * The main page is the page that users see subscription.
+ * @author chayongbin
+ */
 public class MainActivity extends ActionBarActivity {
 
     @Override

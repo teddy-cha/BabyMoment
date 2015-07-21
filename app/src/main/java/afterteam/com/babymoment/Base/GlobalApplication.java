@@ -14,6 +14,7 @@ import afterteam.com.babymoment.utils.LogUtils;
 
 /**
  * The application objects for managing images in the app -level cache.
+ * @author chayongbin
  */
 public class GlobalApplication extends Application {
 
@@ -46,7 +47,7 @@ public class GlobalApplication extends Application {
         Session.initialize(this);
 
         // @test session for Sign in Button
-        Session.initialize(this, AuthType.KAKAO_TALK_EXCLUDE_NATIVE_LOGIN);
+//        Session.initialize(this, AuthType.KAKAO_TALK_EXCLUDE_NATIVE_LOGIN);
 
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
