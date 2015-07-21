@@ -10,7 +10,8 @@ import android.widget.Toast;
 import afterteam.com.babymoment.R;
 
 /**
- * Created by chayongbin on 15. 7. 21..
+ * Toast Utils for Kakao usermgmt
+ * @author chayongbin
  */
 public class BabyMomentToast {
     public static Toast makeToast(Context context, String body, int duration){
