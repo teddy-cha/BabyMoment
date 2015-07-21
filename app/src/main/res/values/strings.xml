@@ -11,4 +11,8 @@
 
     <!-- Unstable network connection Message -->
     <string name="error_message_for_service_unavailable">Unstable network connection. \nPlease try again later.</string>
+
+    <!-- For kakaoTalk -->
+    <string name="kakaotalk_profile_button">Get Talk Profile</string>
+    <string name="kakaotalk_country_label">country ISO</string>
 </resources>
