@@ -2,17 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="afterteam.com.babymoment" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- This is Kakao Login & Link Api Key -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="04ae7f6069e36c7006c24f142ed12476" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
