@@ -10,7 +10,7 @@ import com.kakao.usermgmt.UserManagement;
 
 import java.util.HashMap;
 
-import afterteam.com.babymoment.Base.BaseSignupActivity;
+import afterteam.com.babymoment.base.BaseSignupActivity;
 import afterteam.com.babymoment.utils.BabyMomentToast;
 import afterteam.com.babymoment.utils.LogUtils;
 

@@ -1,4 +1,4 @@
-package afterteam.com.babymoment.Base;
+package afterteam.com.babymoment.base;
 
 import android.app.Application;
 import android.graphics.Bitmap;
@@ -7,7 +7,6 @@ import android.support.v4.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 
 import afterteam.com.babymoment.utils.LogUtils;

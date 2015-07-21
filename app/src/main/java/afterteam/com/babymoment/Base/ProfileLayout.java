@@ -1,4 +1,4 @@
-package afterteam.com.babymoment.Base;
+package afterteam.com.babymoment.base;
 
 import android.app.Application;
 import android.content.Context;
@@ -16,8 +16,8 @@ import afterteam.com.babymoment.R;
 
 /**
  * The default UserProfile (user ID, nickname, profile images) to draw Layout.
- * 1. Declares the {@link afterteam.com.babymoment.Base.ProfileLayout} in the layout to expose your profile.
- * 2. By using a {@link  afterteam.com.babymoment.Base.ProfileLayout#setMeResponseCallback(com.kakao.usermgmt.MeResponseCallback)} to set the callback according to the request result user information
+ * 1. Declares the {@link afterteam.com.babymoment.base.ProfileLayout} in the layout to expose your profile.
+ * 2. By using a {@link  afterteam.com.babymoment.base.ProfileLayout#setMeResponseCallback(com.kakao.usermgmt.MeResponseCallback)} to set the callback according to the request result user information
  * @author chayongbin
  * @Reference Kakao Sample
  */
@@ -150,7 +150,7 @@ public class ProfileLayout extends FrameLayout {
     }
 
     private void initView() {
-        View view = inflate(getContext(), R.layout.layout_common_kakao_profile, this);
+        View view = inflate(getContext(), R.layout.layout_base_kakao_profile, this);
 
         profile = (NetworkImageView) view.findViewById(R.id.com_kakao_profile_image);
         background = (NetworkImageView) view.findViewById(R.id.background);

@@ -2,7 +2,7 @@ package afterteam.com.babymoment.login;
 
 import android.content.Intent;
 
-import afterteam.com.babymoment.Base.BaseLoginActivity;
+import afterteam.com.babymoment.base.BaseLoginActivity;
 
 /**
  * User Management API is a sign-in base.

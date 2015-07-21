@@ -1,4 +1,4 @@
-package afterteam.com.babymoment.Base;
+package afterteam.com.babymoment.base;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -15,4 +15,11 @@
     <!-- For kakaoTalk -->
     <string name="kakaotalk_profile_button">Get Talk Profile</string>
     <string name="kakaotalk_country_label">country ISO</string>
+    <string name="title_for_kakao_sdk_sample">Kakao SDK Sample</string>
+    <string name="usermgmg_signup_button">Signup</string>
+    <string name="usermgmg_me_button">Me</string>
+    <string name="text_usermgmt">User Management</string>
+
+
+
 </resources>
