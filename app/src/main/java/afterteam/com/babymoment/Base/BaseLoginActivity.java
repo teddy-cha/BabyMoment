@@ -13,6 +13,7 @@ import com.kakao.auth.Session;
 import com.kakao.auth.SessionCallback;
 import com.kakao.usermgmt.LoginButton;
 import com.kakao.util.exception.KakaoException;
+import com.urqa.clientinterface.URQAController;
 
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.utils.BabyMomentToast;
@@ -39,6 +40,7 @@ public class BaseLoginActivity extends Activity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        URQAController.InitializeAndStartSession(getApplicationContext(),"8E655F3E");
         setContentView(R.layout.layout_base_kakao_login);
 
         // Find the login button.
