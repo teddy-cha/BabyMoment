@@ -35,17 +35,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.8'
-//    compile 'com.kakao.sdk:usermgmt:1.1.0'
     compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
     compile 'com.android.support:support-v4:22.2.0'
-}
-
-def getModuleName(moduleName) {
-    println moduleName + ", " + project.defaultDeployPhase
-    def result = moduleName
-    if(project.defaultDeployPhase.toLowerCase() == 'release') {
-        return result
-    }
-
-    return result + "-${project.defaultDeployPhase.toLowerCase()}"
 }

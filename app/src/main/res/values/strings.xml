@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- The default strings -->
     <string name="app_name">BabyMoment</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!-- API key for Kakao SDK -->
     <string name="kakao_app_key">04ae7f6069e36c7006c24f142ed12476</string>
 
+    <!-- Unstable network connection Message -->
+    <string name="error_message_for_service_unavailable">Unstable network connection. \nPlease try again later.</string>
 </resources>
