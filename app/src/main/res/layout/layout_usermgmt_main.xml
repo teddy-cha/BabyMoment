@@ -14,7 +14,7 @@
             android:layout_height="56dp"
             layout="@layout/view_sample_title" />
 
-        <com.kakao.sdk.sample.common.widget.ProfileLayout
+        <afterteam.com.babymoment.base.ProfileLayout
             android:id="@+id/com_kakao_user_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
