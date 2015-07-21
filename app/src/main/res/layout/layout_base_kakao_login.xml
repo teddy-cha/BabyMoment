@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
-                android:background="@color/color8"
+                android:background="#4A4A4C"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -15,7 +15,7 @@
 
     <TextView
         android:text="Log in with Kakao"
-        android:textColor="@color/color6"
+        android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:layout_marginTop="22dp"
         android:layout_centerHorizontal="true"
