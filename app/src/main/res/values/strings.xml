@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- The default strings -->
     <string name="app_name">BabyMoment</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- API key for Kakao SDK -->
+    <string name="kakao_app_key">04ae7f6069e36c7006c24f142ed12476</string>
+
+    <!-- Unstable network connection Message -->
+    <string name="error_message_for_service_unavailable">Unstable network connection. \nPlease try again later.</string>
+
+    <!-- For kakaoTalk -->
+    <string name="kakaotalk_profile_button">Get Talk Profile</string>
+    <string name="kakaotalk_country_label">country ISO</string>
+    <string name="title_for_kakao_sdk_sample">Kakao SDK Sample</string>
+    <string name="usermgmg_signup_button">Signup</string>
+    <string name="usermgmg_me_button">Me</string>
+    <string name="text_usermgmt">User Management</string>
+
+
 
 </resources>
