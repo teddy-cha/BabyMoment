@@ -7,6 +7,7 @@ import android.support.v4.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 
 import afterteam.com.babymoment.utils.LogUtils;

@@ -28,9 +28,10 @@ public class BaseLoginActivity extends Activity {
 
     private static final String TAG = LogUtils.makeTag(BaseLoginActivity.class);
 
-    private LoginButton loginButton;
+    private BabyMomentLoginButton loginButton;
     private final SessionCallback mySessionCallback = new MySessionStatusCallback();
     private Session session;
+
 
     /**
      * Calling super.onCreate to leave the Session processing .
@@ -44,7 +45,7 @@ public class BaseLoginActivity extends Activity {
         setContentView(R.layout.layout_base_kakao_login);
 
         // Find the login button.
-        loginButton = (LoginButton) findViewById(R.id.com_kakao_login);
+        loginButton = (BabyMomentLoginButton) findViewById(R.id.com_kakao_login);
 
         session = Session.getCurrentSession();
         session.addCallback(mySessionCallback);
