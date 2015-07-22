@@ -22,13 +22,10 @@
         android:src="@drawable/icon_logo_text"/>
 
     <afterteam.com.babymoment.base.BabyMomentLoginButton
-        android:id="@+id/com_kakao_login"
+        android:id="@+id/kakao_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
 

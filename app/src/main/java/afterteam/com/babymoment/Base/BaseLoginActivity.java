@@ -26,7 +26,7 @@ import afterteam.com.babymoment.utils.LogUtils;
  */
 public class BaseLoginActivity extends Activity {
 
-    private static final String TAG = LogUtils.makeTag(BaseLoginActivity.class);
+    private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
 
     private BabyMomentLoginButton loginButton;
     private final SessionCallback mySessionCallback = new MySessionStatusCallback();
@@ -45,7 +45,7 @@ public class BaseLoginActivity extends Activity {
         setContentView(R.layout.layout_base_kakao_login);
 
         // Find the login button.
-        loginButton = (BabyMomentLoginButton) findViewById(R.id.com_kakao_login);
+        loginButton = (BabyMomentLoginButton) findViewById(R.id.kakao_login);
 
         session = Session.getCurrentSession();
         session.addCallback(mySessionCallback);

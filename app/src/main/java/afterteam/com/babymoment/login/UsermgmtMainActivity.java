@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.deser.std.ClassDeserializer;
 import com.kakao.auth.APIErrorResult;
 import com.kakao.usermgmt.LogoutResponseCallback;
 import com.kakao.usermgmt.MeResponseCallback;
@@ -31,7 +32,7 @@ import afterteam.com.babymoment.utils.LogUtils;
  */
 public class UsermgmtMainActivity extends Activity {
 
-    private static final String TAG = LogUtils.makeTag(UsermgmtMainActivity.class);
+    private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
     
     private UserProfile userProfile;
     private ProfileLayout profileLayout;

@@ -28,7 +28,7 @@ import afterteam.com.babymoment.R;
  * Classes for the Custom button to change KakaoTalk login button
  * @author chayongbin
  */
-public class BabyMomentLoginButton extends LoginButton {
+public class BabyMomentLoginButton extends android.widget.FrameLayout {
 
     public BabyMomentLoginButton(Context context) {
         super(context);

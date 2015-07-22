@@ -21,7 +21,7 @@ import afterteam.com.babymoment.utils.LogUtils;
  */
 public class UsermgmtSignupActivity extends BaseSignupActivity {
 
-    private static final String TAG = LogUtils.makeTag(UsermgmtSignupActivity.class);
+    private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
 
     protected void redirectLoginActivity() {
         Intent intent = new Intent(this, UserMgmtLoginActivity.class);
