@@ -28,7 +28,7 @@ import afterteam.com.babymoment.R;
  * Classes for the Custom button to change KakaoTalk login button
  * @author chayongbin
  */
-public class BabyMomentLoginButton extends LoginButton {
+public class BabyMomentLoginButton extends android.widget.FrameLayout {
 
     public BabyMomentLoginButton(Context context) {
         super(context);
@@ -48,7 +48,7 @@ public class BabyMomentLoginButton extends LoginButton {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        inflate(getContext(), R.layout.kakao_login_layout, this);
+        inflate(getContext(), R.layout.custom_kakao_login_layout, this);
         setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // 카톡 또는 카스가 존재하면 옵션을 보여주고, 존재하지 않으면 바로 직접 로그인창.

@@ -9,7 +9,7 @@
         android:id="@+id/icon"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="178dp"
+        android:layout_marginTop="130dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/icon_login"/>
 
@@ -17,18 +17,17 @@
         android:id="@+id/logo"
         android:layout_width="160dp"
         android:layout_height="95dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="230dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/icon_logo_text"/>
 
     <afterteam.com.babymoment.base.BabyMomentLoginButton
-        android:id="@+id/com_kakao_login"
-        android:layout_width="250dp"
+        android:id="@+id/kakao_login"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginBottom="80dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
 

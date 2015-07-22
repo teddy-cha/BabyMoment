@@ -4,15 +4,15 @@ import android.util.Log;
 
 /**
  * Util for processing the Log
- * Use [private static final String TAG = LogUtils.makeTag(<current class name>);]
+ * Use [private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());]
  * @author chayongbin
  */
 
 public class LogUtils {
     public static final String PRE_FIX = "BabyMoment_";
 
-    public static String makeTag(Class clazz) {
-        return PRE_FIX + clazz.getSimpleName();
+    public static String makeTag(String className) {
+        return PRE_FIX + className;
     }
 
     // For Special exception of Kakao

@@ -23,7 +23,7 @@ import afterteam.com.babymoment.utils.LogUtils;
  */
 public class BaseSignupActivity extends Activity {
 
-    private static final String TAG = LogUtils.makeTag(BaseSignupActivity.class);
+    private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
 
     /**
      * me calls to determine how to draw the sign-up page or go to Main page.

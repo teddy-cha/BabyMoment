@@ -18,7 +18,7 @@ import afterteam.com.babymoment.utils.LogUtils;
  */
 public class GlobalApplication extends Application {
 
-    private static final String TAG = LogUtils.makeTag(GlobalApplication.class);
+    private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
 
     private static volatile GlobalApplication instance = null;
 
