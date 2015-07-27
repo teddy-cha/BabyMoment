@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.kakao.auth.Session;
 import com.kakao.auth.SessionCallback;
-import com.kakao.usermgmt.LoginButton;
 import com.kakao.util.exception.KakaoException;
 import com.urqa.clientinterface.URQAController;
 
@@ -28,7 +27,7 @@ public class BaseLoginActivity extends Activity {
 
     private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
 
-    private BabyMomentLoginButton loginButton;
+    private afterteam.com.babymoment.base.BabyMomentLoginButton loginButton;
     private final SessionCallback mySessionCallback = new MySessionStatusCallback();
     private Session session;
 
@@ -45,7 +44,7 @@ public class BaseLoginActivity extends Activity {
         setContentView(R.layout.layout_base_kakao_login);
 
         // Find the login button.
-        loginButton = (BabyMomentLoginButton) findViewById(R.id.kakao_login);
+        loginButton = (afterteam.com.babymoment.base.BabyMomentLoginButton) findViewById(R.id.kakao_login);
 
         session = Session.getCurrentSession();
         session.addCallback(mySessionCallback);
