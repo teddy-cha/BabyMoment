@@ -50,7 +50,7 @@ public class BaseSignupActivity extends Activity {
     }
 
     protected void redirectLoginActivity() {
-        Intent intent = new Intent(this, BaseLoginActivity.class);
+        Intent intent = new Intent(this, afterteam.com.babymoment.base.BaseLoginActivity.class);
         startActivity(intent);
         finish();
     }
