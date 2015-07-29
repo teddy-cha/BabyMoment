@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.kakao.auth.Session;
 import com.kakao.auth.SessionCallback;
-import com.kakao.usermgmt.LoginButton;
 import com.kakao.util.exception.KakaoException;
 import com.urqa.clientinterface.URQAController;
 
