@@ -8,7 +8,7 @@
     android:showDividers="none">
 
     <ExpandableListView 
-        android:id="@+id/elv_list"
+        android:id="@+id/lv_home_expendablelist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:groupIndicator="@null"
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
+                android:text="no data"
                 android:id="@+id/tv_home_bottom_medicine"
                 android:layout_gravity="center"
                 android:textSize="10dp" />
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
+                android:text="no data"
                 android:id="@+id/tv_home_bottom_sleep"
                 android:layout_gravity="center"
                 android:textSize="10dp" />
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
+                android:text="no data"
                 android:id="@+id/tv_home_bottom_diaper"
                 android:layout_gravity="center"
                 android:textSize="10dp" />
@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
+                android:text="no data"
                 android:id="@+id/tv_home_bottom_feed"
                 android:layout_gravity="center"
                 android:textSize="10dp" />
