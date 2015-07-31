@@ -16,16 +16,7 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="04ae7f6069e36c7006c24f142ed12476" />
 
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-
-        <!-- login를 위한 activity -->
+        <!-- Activity for Login -->
         <activity
             android:name=".sign.UserMgmtLoginActivity"
             android:screenOrientation="portrait"
@@ -48,14 +39,14 @@
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:launchMode="singleTop"/>
 
-        <!-- home/메인 리스트를 위한 activity -->
+        <!-- activity for home/main list -->
         <activity
             android:name=".home.ActionListActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light"/>
 
-        <!-- daily graph를 위한 activity -->
+        <!-- activity for daily graph-->
         <activity android:name=".graph.DailyGraph"
                   android:screenOrientation="landscape" >
             <!--<intent-filter>-->
