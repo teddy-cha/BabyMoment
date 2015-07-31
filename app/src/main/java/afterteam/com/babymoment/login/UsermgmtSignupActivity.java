@@ -14,6 +14,8 @@ import afterteam.com.babymoment.base.BaseSignupActivity;
 import afterteam.com.babymoment.utils.BabyMomentToast;
 import afterteam.com.babymoment.utils.LogUtils;
 
+import afterteam.com.babymoment.home.ActionListActivity;
+
 /**
  * After verifying that a valid session
  * It calls the ME, Check whether your subscription is drawn to the signup page or move to the Main page.
@@ -35,6 +37,13 @@ public class UsermgmtSignupActivity extends BaseSignupActivity {
         finish();
     }
 
+    // added by eunjoo for home main show up
+    protected void redirectHomeActivity() {
+        final Intent intent = new Intent(this, ActionListActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     protected void showSignup() {
         // Signup Method
     }
@@ -46,8 +55,12 @@ public class UsermgmtSignupActivity extends BaseSignupActivity {
         UserManagement.requestSignup(new SignupResponseCallback() {
             @Override
             public void onSuccess(final long userId) {
-                redirectMainActivity();
+
+//                redirectMainActivity();
+                // added by eunjoo for home main show up
+                redirectHomeActivity();
             }
+
 
             @Override
             public void onSessionClosedFailure(final APIErrorResult errorResult) {

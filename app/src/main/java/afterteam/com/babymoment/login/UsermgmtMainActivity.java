@@ -21,6 +21,7 @@ import com.kakao.usermgmt.UserProfile;
 
 import afterteam.com.babymoment.base.ProfileLayout;
 import afterteam.com.babymoment.R;
+import afterteam.com.babymoment.home.ActionListActivity;
 import afterteam.com.babymoment.utils.BabyMomentToast;
 import afterteam.com.babymoment.utils.LogUtils;
 
@@ -55,6 +56,8 @@ public class UsermgmtMainActivity extends Activity {
         if(userProfile != null) {
             showProfile();
         }
+
+        redirectHomeActivity();
     }
 
     private void redirectLoginActivity() {
@@ -65,6 +68,13 @@ public class UsermgmtMainActivity extends Activity {
 
     private void redirectSignupActivity() {
         Intent intent = new Intent(this, UsermgmtSignupActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    // added by eunjoo for home main show up
+    protected void redirectHomeActivity() {
+        final Intent intent = new Intent(this, ActionListActivity.class);
         startActivity(intent);
         finish();
     }

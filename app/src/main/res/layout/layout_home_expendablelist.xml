@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_main_extendable_bg"
+        android:gravity="center_vertical"
+        android:layout_marginTop="6dp">
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"/>
+    
+    <TextView
+        android:id="@+id/tv_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginLeft="6dp"
+        android:textColor="#cccccc" />
+
+        <TextView
+            android:id="@+id/tv_sum_medicine"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:textSize="16dp"
+            android:layout_marginLeft="50dp"
+            android:textColor="#ffffff"
+            android:gravity="center_horizontal"
+            android:background="@drawable/shape_main_expendable_group_medicine_bg"
+            android:clickable="false"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:paddingTop="2dp" />
+
+        <TextView
+            android:id="@+id/tv_sum_sleep"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:textSize="16dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ffffff"
+            android:gravity="center_horizontal"
+            android:background="@drawable/shape_main_expendable_group_sleep_bg"
+            android:clickable="false"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:paddingTop="2dp" />
+
+        <TextView
+            android:id="@+id/tv_sum_diaper"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:textSize="16dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ffffff"
+            android:gravity="center_horizontal"
+            android:background="@drawable/shape_main_expendable_group_diaper_bg"
+            android:clickable="false"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:paddingTop="2dp" />
+
+        <TextView
+            android:id="@+id/tv_sum_feed"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:textSize="16dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ffffff"
+            android:gravity="center_horizontal"
+            android:background="@drawable/shape_main_expendable_group_feed_bg"
+            android:clickable="false"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:paddingTop="2dp" />
+
+    </LinearLayout>
+</LinearLayout>

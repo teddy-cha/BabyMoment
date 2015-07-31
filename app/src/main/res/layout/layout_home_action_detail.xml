@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_main_extendable_child_bg"
+    android:gravity="center_vertical"
+    android:padding="4dp">
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/iv_action_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="6dp" />
+
+    <TextView
+        android:id="@+id/tv_action_count"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/iv_action_icon"
+        android:layout_alignTop="@+id/iv_action_icon"
+        android:layout_toRightOf="@+id/iv_action_icon"
+        android:layout_marginLeft="6dp" />
+
+    <TextView
+        android:id="@+id/tv_action_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/tv_action_count"
+        android:layout_alignTop="@+id/tv_action_count"
+        android:layout_toRightOf="@+id/tv_action_count"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/tv_action_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/tv_action_time"
+        android:layout_alignTop="@+id/tv_action_time"
+        android:layout_toRightOf="@+id/tv_action_time" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/iv_action_photo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp" />
+
+</RelativeLayout>
