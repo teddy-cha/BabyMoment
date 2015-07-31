@@ -12,12 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +27,10 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import afterteam.com.babymoment.R;
+import afterteam.com.babymoment.utils.BabyMomentToast;
 
 
-public class ActionListActivity extends AppCompatActivity implements ObservableScrollViewCallbacks {
+public class ActionListActivity extends ActionBarActivity{
 
     private ArrayList<String> mGroupList;
     private ArrayList<ArrayList<ActionDTO>> mChildList;
@@ -258,28 +261,5 @@ public class ActionListActivity extends AppCompatActivity implements ObservableS
 
         mGroupList.add(0, "2015-07-25");
         mChildList.add(0, mChildListContent1);
-    }
-
-    // 별도 추가 << 테스트 진행중 >>
-    @Override
-    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-    }
-
-    @Override
-    public void onDownMotionEvent() {
-    }
-
-    @Override
-    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-        ActionBar ab = getSupportActionBar();
-        if (scrollState == ScrollState.UP) {
-            if (ab.isShowing()) {
-                ab.hide();
-            }
-        } else if (scrollState == ScrollState.DOWN) {
-            if (!ab.isShowing()) {
-                ab.show();
-            }
-        }
     }
 }
