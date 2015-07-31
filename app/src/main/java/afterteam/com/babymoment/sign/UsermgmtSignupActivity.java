@@ -1,4 +1,4 @@
-package afterteam.com.babymoment.login;
+package afterteam.com.babymoment.sign;
 
 import android.content.Intent;
 import android.util.Log;

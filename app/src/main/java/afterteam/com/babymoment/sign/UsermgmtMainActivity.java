@@ -1,4 +1,4 @@
-package afterteam.com.babymoment.login;
+package afterteam.com.babymoment.sign;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fasterxml.jackson.databind.deser.std.ClassDeserializer;
 import com.kakao.auth.APIErrorResult;
 import com.kakao.usermgmt.LogoutResponseCallback;
 import com.kakao.usermgmt.MeResponseCallback;
