@@ -14,6 +14,7 @@ public class Baby extends RealmObject {
     @PrimaryKey
     private String baby_id;
 
+    private String baby_sex;
     private String baby_name;
     private String baby_dob;
     private String baby_profile_photo;
@@ -58,5 +59,13 @@ public class Baby extends RealmObject {
 
     public void setUsers(RealmList<User> users) {
         this.users = users;
+    }
+
+    public String getBaby_sex() {
+        return baby_sex;
+    }
+
+    public void setBaby_sex(String baby_sex) {
+        this.baby_sex = baby_sex;
     }
 }
