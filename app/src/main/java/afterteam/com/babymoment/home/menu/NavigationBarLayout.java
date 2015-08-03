@@ -10,7 +10,7 @@ import afterteam.com.babymoment.home.ActionListActivity;
 /**
  * @author chayongbin
  */
-public class NavigationBarLayout extends ActionListActivity{
+public class NavigationBarLayout{
 
 
     /**
