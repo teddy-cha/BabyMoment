@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import afterteam.com.babymoment.R;
+import afterteam.com.babymoment.detail.MedicineActivity;
 import afterteam.com.babymoment.detail.SleepActivity;
 
 
@@ -72,6 +73,7 @@ public class ActionListActivity extends ActionBarActivity {
 
                 switch (child.getType()) {
                     case 1:
+                        intent = new Intent(getApplicationContext(), MedicineActivity.class);
                         break;
                     case 2:
                         intent = new Intent(getApplicationContext(), SleepActivity.class);
