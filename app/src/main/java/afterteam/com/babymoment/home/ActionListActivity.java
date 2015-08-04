@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import afterteam.com.babymoment.R;
+import afterteam.com.babymoment.detail.SleepActivity;
 
 
 public class ActionListActivity extends ActionBarActivity {
@@ -62,8 +64,14 @@ public class ActionListActivity extends ActionBarActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-//                Toast.makeText(getApplicationContext(), "c click = " + childPosition,
-//                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "c click = " + childPosition,
+                        Toast.LENGTH_SHORT).show();
+
+                ActionDTO child = mBaseExpandableAdapter.getChild(groupPosition, childPosition);
+                Intent intent = new Intent(getApplicationContext(), SleepActivity.class);
+                intent.putExtra("id", child.getId());
+                startActivity(intent);
+
                 return false;
             }
         });

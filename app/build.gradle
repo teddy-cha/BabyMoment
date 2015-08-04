@@ -33,6 +33,7 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.wdullaer:materialdatetimepicker:1.4.2'
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.8'
     compile 'com.android.support:support-v4:22.2.0'

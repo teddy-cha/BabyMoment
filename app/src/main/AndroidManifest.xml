@@ -55,6 +55,13 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light"/>
 
+        <!-- detail/sleep 수정을 위한 activity -->
+        <activity
+            android:name=".detail.SleepActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light"/>
+
         <!-- daily graph를 위한 activity -->
         <activity android:name=".graph.DailyGraph"
                   android:screenOrientation="landscape" >
