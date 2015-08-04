@@ -62,7 +62,18 @@
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
-            </activity>
+        </activity>
+
+        <!-- app widget을 위한 receiver설정 -->
+        <receiver android:name=".widget.BabyMomentWidget" android:label="BabyMoment">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_configuration"/>
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 
