@@ -68,9 +68,26 @@ public class ActionListActivity extends ActionBarActivity {
                         Toast.LENGTH_SHORT).show();
 
                 ActionDTO child = mBaseExpandableAdapter.getChild(groupPosition, childPosition);
-                Intent intent = new Intent(getApplicationContext(), SleepActivity.class);
-                intent.putExtra("id", child.getId());
-                startActivity(intent);
+                Intent intent = null;
+
+                switch (child.getType()) {
+                    case 1:
+                        break;
+                    case 2:
+                        intent = new Intent(getApplicationContext(), SleepActivity.class);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        return false;
+                }
+
+                if (intent != null) {
+                    intent.putExtra("id", child.getId());
+                    startActivity(intent);
+                }
 
                 return false;
             }

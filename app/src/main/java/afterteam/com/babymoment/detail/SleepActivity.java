@@ -1,41 +1,101 @@
 package afterteam.com.babymoment.detail;
 
 import android.app.Activity;
-import android.app.TimePickerDialog;
-import android.support.v7.app.ActionBarActivity;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog.OnTimeSetListener;
+
+import java.util.Calendar;
+
 
 import afterteam.com.babymoment.R;
 
-public class SleepActivity extends Activity{
+public class SleepActivity extends Activity implements OnTimeSetListener {
+
+    private TextView tvStartTime, tvEndTime;
+    boolean isStart = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_detail_sleep);
+
+        setTimePicker();
+
+        Button btnCancle = (Button) findViewById(R.id.btn_detail_cancel);
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void setTimePicker() {
+        tvStartTime = (TextView) findViewById(R.id.tv_starttime);
+
+        tvStartTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isStart = true;
+
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        SleepActivity.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        true
+                );
+
+                tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        Log.d("TimePicker", "Dialog was cancelled");
+                    }
+                });
+                tpd.show(getFragmentManager(), "Timepickerdialog");
+            }
+        });
+
+        tvEndTime = (TextView) findViewById(R.id.tv_endtime);
+
+        tvEndTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isStart = false;
+
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        SleepActivity.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        true
+                );
+
+                tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        Log.d("TimePicker", "Dialog was cancelled");
+                    }
+                });
+                tpd.show(getFragmentManager(), "Timepickerdialog2");
+            }
+        });
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+        String time = hourOfDay + " : " + minute;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        if (isStart) tvStartTime.setText(time);
+        else tvEndTime.setText(time);
     }
-
-//    @Override
-//    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-//        String time = "You picked the following time: "+hourOfDay+"h"+minute;
-//        timeTextView.setText(time);
-//    }
-
 }

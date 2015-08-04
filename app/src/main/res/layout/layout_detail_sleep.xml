@@ -34,7 +34,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/shape_detail_inputlayout_bg">
+        android:background="@drawable/shape_detail_inputlayout_bg"
+        android:layout_marginBottom="48dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -56,10 +57,15 @@
                 android:layout_marginRight="20dp"
                 android:textSize="14dp" />
 
-            <TimePicker
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/timePicker" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="시간지정"
+                android:id="@+id/tv_starttime"
+                android:layout_gravity="center"
+                android:gravity="center" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -82,12 +88,15 @@
                 android:layout_marginRight="20dp"
                 android:textSize="14dp" />
 
-            <TimePicker
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/timePicker3" >
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="시간지정"
+                android:id="@+id/tv_endtime"
+                android:layout_gravity="center"
+                android:gravity="center" />
 
-            </TimePicker>
         </LinearLayout>
 
         <LinearLayout
@@ -96,7 +105,8 @@
             android:layout_height="match_parent"
             android:transitionGroup="false"
             android:weightSum="1"
-            android:id="@+id/layout_sleepmemo">
+            android:id="@+id/layout_sleepmemo"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,6 +118,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:textSize="14dp" />
 
             <EditText
@@ -116,15 +127,45 @@
                 android:id="@+id/editText"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="메모를 입력하세요"
                 android:textColor="#ccc"
                 android:layout_gravity="top"
-                android:singleLine="false"
                 android:gravity="top"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:background="#fff" />
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:text="입력 취소"
+            android:id="@+id/btn_detail_cancel"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="6dp"
+            android:layout_weight="1"
+            android:textColor="#2d4306"
+            android:background="@drawable/shape_detail_button_sleep" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:text="저장하기"
+            android:id="@+id/btn_detail_save"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/shape_detail_button_sleep" />
     </LinearLayout>
 
 </RelativeLayout>
