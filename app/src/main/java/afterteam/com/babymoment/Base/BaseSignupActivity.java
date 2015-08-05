@@ -11,8 +11,8 @@ import com.kakao.usermgmt.MeResponseCallback;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.UserProfile;
 
-import afterteam.com.babymoment.MainActivity;
 import afterteam.com.babymoment.R;
+import afterteam.com.babymoment.home.ActionListActivity;
 import afterteam.com.babymoment.utils.BabyMomentToast;
 import afterteam.com.babymoment.utils.LogUtils;
 
@@ -44,7 +44,7 @@ public class BaseSignupActivity extends Activity {
     }
 
     protected void redirectMainActivity() {
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, ActionListActivity.class);
         startActivity(intent);
         finish();
     }

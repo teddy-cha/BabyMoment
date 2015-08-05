@@ -22,6 +22,7 @@ import android.widget.TextView;
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.detail.MedicineActivity;
 import afterteam.com.babymoment.detail.SleepActivity;
+import afterteam.com.babymoment.utils.BabyMomentToast;
 
 
 public class ActionListActivity extends ActionBarActivity{
@@ -64,8 +65,6 @@ public class ActionListActivity extends ActionBarActivity{
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                Toast.makeText(getApplicationContext(), "c click = " + childPosition,
-                        Toast.LENGTH_SHORT).show();
 
                 ActionDTO child = mBaseExpandableAdapter.getChild(groupPosition, childPosition);
                 Intent intent = null;
