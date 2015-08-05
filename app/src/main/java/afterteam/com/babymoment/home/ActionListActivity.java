@@ -18,14 +18,13 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.detail.MedicineActivity;
 import afterteam.com.babymoment.detail.SleepActivity;
 
 
-public class ActionListActivity extends ActionBarActivity {
+public class ActionListActivity extends ActionBarActivity{
 
     private ArrayList<String> mGroupList;
     private ArrayList<ArrayList<ActionDTO>> mChildList;
