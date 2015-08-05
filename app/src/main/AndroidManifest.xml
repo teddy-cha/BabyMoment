@@ -72,6 +72,10 @@
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.babymoment.widget.Feed"/>
+                <action android:name="com.babymoment.widget.Sleep"/>
+                <action android:name="com.babymoment.widget.Diaper"/>
+                <action android:name="com.babymoment.widget.Medicine"/>
             </intent-filter>
         </receiver>
 
