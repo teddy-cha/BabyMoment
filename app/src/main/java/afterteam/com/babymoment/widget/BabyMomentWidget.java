@@ -10,12 +10,16 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import afterteam.com.babymoment.R;
+import afterteam.com.babymoment.model.Action;
 import afterteam.com.babymoment.utils.LogUtils;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by hyes on 2015. 8. 4..
  */
 public class BabyMomentWidget extends AppWidgetProvider{
+
 
     private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
     public static final String ACTION_FEED ="com.babymoment.widget.Feed";
@@ -49,6 +53,7 @@ public class BabyMomentWidget extends AppWidgetProvider{
         String temp = "widge test";
         //to do- DB에서 횟수 불러와서 적용하기
 
+        dbInit();
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.layout_widget);
         if(intent.getAction().equals(ACTION_FEED)){
             rv.setTextViewText(R.id.tv_home_bottom_feed, temp);
@@ -64,6 +69,7 @@ public class BabyMomentWidget extends AppWidgetProvider{
         appWidgetManager.updateAppWidget(cpName, rv);
 
     }
+
 
     @Override
     public void onDisabled(Context context) {
@@ -93,4 +99,12 @@ public class BabyMomentWidget extends AppWidgetProvider{
         }
 
     }
+
+    private void dbInit() {
+        Realm realm = Realm.getInstance(context);
+        RealmResults<Action> actions = realm.where(Action.class)
+                .contains("type", "feed")
+                .findAll();
+    }
+
 }
