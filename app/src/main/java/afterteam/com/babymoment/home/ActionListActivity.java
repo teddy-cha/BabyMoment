@@ -20,6 +20,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import afterteam.com.babymoment.R;
+import afterteam.com.babymoment.detail.DiaperActivity;
+import afterteam.com.babymoment.detail.FeedActivity;
 import afterteam.com.babymoment.detail.MedicineActivity;
 import afterteam.com.babymoment.detail.SleepActivity;
 import afterteam.com.babymoment.utils.BabyMomentToast;
@@ -49,18 +51,7 @@ public class ActionListActivity extends ActionBarActivity{
         mBaseExpandableAdapter = new BaseExpandableAdapter(this, mGroupList, mChildList);
         mListView.setAdapter(mBaseExpandableAdapter);
 
-        // 그룹 클릭 했을 경우 이벤트
-        mListView.setOnGroupClickListener(new OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-//                Toast.makeText(getApplicationContext(), "g click = " + groupPosition,
-//                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
-        // 차일드 클릭 했을 경우 이벤트
+        // child click event
         mListView.setOnChildClickListener(new OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
@@ -77,8 +68,10 @@ public class ActionListActivity extends ActionBarActivity{
                         intent = new Intent(getApplicationContext(), SleepActivity.class);
                         break;
                     case 3:
+                        intent = new Intent(getApplicationContext(), DiaperActivity.class);
                         break;
                     case 4:
+                        intent = new Intent(getApplicationContext(), FeedActivity.class);
                         break;
                     default:
                         return false;
@@ -93,23 +86,30 @@ public class ActionListActivity extends ActionBarActivity{
             }
         });
 
-        // 그룹이 닫힐 경우 이벤트
-        mListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-//                Toast.makeText(getApplicationContext(), "g Collapse = " + groupPosition,
-//                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // 그룹이 열릴 경우 이벤트
-        mListView.setOnGroupExpandListener(new OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-//                Toast.makeText(getApplicationContext(), "g Expand = " + groupPosition,
-//                        Toast.LENGTH_SHORT).show();
-            }
-        });
+//        // group click event
+//        mListView.setOnGroupClickListener(new OnGroupClickListener() {
+//            @Override
+//            public boolean onGroupClick(ExpandableListView parent, View v,
+//                                        int groupPosition, long id) {
+//                // Toast.makeText(getApplicationContext(), "g click = " + groupPosition,
+//                //        Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
+//
+//        // group close event
+//        mListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
+//            @Override
+//            public void onGroupCollapse(int groupPosition) {
+//            }
+//        });
+//
+//        // group open event
+//        mListView.setOnGroupExpandListener(new OnGroupExpandListener() {
+//            @Override
+//            public void onGroupExpand(int groupPosition) {
+//            }
+//        });
 
         // open first group
         mListView.expandGroup(0);

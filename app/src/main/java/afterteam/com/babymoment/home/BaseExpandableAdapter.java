@@ -70,9 +70,9 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 		
 		// 그룹을 펼칠때와 닫을때 아이콘을 변경해 준다.
 		if (isExpanded) {
-			viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_left);
+			viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_down);
 		} else {
-			viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_down_white);
+			viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_left_white);
 		}
 
 		viewHolder.tv_groupName.setText(getGroup(groupPosition));
