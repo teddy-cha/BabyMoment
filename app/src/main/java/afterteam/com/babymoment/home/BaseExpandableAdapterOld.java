@@ -1,7 +1,5 @@
 package afterteam.com.babymoment.home;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,20 +8,20 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import afterteam.com.babymoment.R;
-import afterteam.com.babymoment.model.Action;
-import afterteam.com.babymoment.utils.TimeUtils;
 
 
-public class BaseExpandableAdapter extends BaseExpandableListAdapter{
-	
+public class BaseExpandableAdapterOld extends BaseExpandableListAdapter{
+
 	private ArrayList<String> groupList = null;
-	private ArrayList<ArrayList<Action>> childList = null;
+	private ArrayList<ArrayList<ActionDTO>> childList = null;
 	private LayoutInflater inflater = null;
 	private ViewHolder viewHolder = null;
-	
-	public BaseExpandableAdapter(Context c, ArrayList<String> groupList, 
-			ArrayList<ArrayList<Action>> childList){
+
+	public BaseExpandableAdapterOld(Context c, ArrayList<String> groupList,
+									ArrayList<ArrayList<ActionDTO>> childList){
 		super();
 		this.inflater = LayoutInflater.from(c);
 		this.groupList = groupList;
@@ -90,7 +88,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 	
 	// 차일드뷰를 반환한다.
 	@Override
-	public Action getChild(int groupPosition, int childPosition) {
+	public ActionDTO getChild(int groupPosition, int childPosition) {
 		return childList.get(groupPosition).get(childPosition);
 	}
 	
@@ -126,11 +124,10 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 			viewHolder = (ViewHolder)v.getTag();
 		}
 
-		Action action = getChild(groupPosition, childPosition);
-		TimeUtils timeUtils = new TimeUtils();
+		ActionDTO action = getChild(groupPosition, childPosition);
 
 		viewHolder.tv_action_count.setText(Integer.toString(action.getCount()));
-		viewHolder.tv_action_time.setText(timeUtils.getStringTime(action.getTime()));
+		viewHolder.tv_action_time.setText(action.getTime());
 		viewHolder.tv_action_detail.setText(action.getDetail());
 
 		setActionIcon(action.getType());

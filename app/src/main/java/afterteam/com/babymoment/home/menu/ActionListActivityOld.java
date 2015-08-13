@@ -1,9 +1,4 @@
-package afterteam.com.babymoment.home;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+package afterteam.com.babymoment.home.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,25 +11,28 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import afterteam.com.babymoment.R;
-import afterteam.com.babymoment.db.HomeTransaction;
 import afterteam.com.babymoment.detail.DiaperActivity;
 import afterteam.com.babymoment.detail.FeedActivity;
 import afterteam.com.babymoment.detail.MedicineActivity;
 import afterteam.com.babymoment.detail.SleepActivity;
-import afterteam.com.babymoment.model.Action;
+import afterteam.com.babymoment.home.ActionDTO;
+import afterteam.com.babymoment.home.BaseExpandableAdapter;
+import afterteam.com.babymoment.home.BaseExpandableAdapterOld;
 import afterteam.com.babymoment.utils.TimeUtils;
 
 
-public class ActionListActivity extends ActionBarActivity{
+public class ActionListActivityOld extends ActionBarActivity{
 
     private ArrayList<String> mGroupList;
-    private ArrayList<ArrayList<Action>> mChildList;
-    public BaseExpandableAdapter mBaseExpandableAdapter;
+    private ArrayList<ArrayList<ActionDTO>> mChildList;
+    public BaseExpandableAdapterOld mBaseExpandableAdapter;
     private ImageButton ibMedicine, ibSleep, ibDiaper, ibFeed;
     private TextView tvMedicine, tvSleep, tvDiaper, tvFeed;
     private TimeUtils timeUtils;
-    private HomeTransaction homeTransaction;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,13 +48,13 @@ public class ActionListActivity extends ActionBarActivity{
     private void setActionList() {
         timeUtils = new TimeUtils();
 
-        // temporarily input dummy data by hard coding
-        setDummyData();
+//        // temporarily input dummy data by hard coding
+//        setDummyData();
 
         // add new date to expendable list if necessary
         addNewDate();
 
-        mBaseExpandableAdapter = new BaseExpandableAdapter(this, mGroupList, mChildList);
+        mBaseExpandableAdapter = new BaseExpandableAdapterOld(this, mGroupList, mChildList);
         mListView.setAdapter(mBaseExpandableAdapter);
 
         // child click event
@@ -65,7 +63,7 @@ public class ActionListActivity extends ActionBarActivity{
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
 
-                Action child = mBaseExpandableAdapter.getChild(groupPosition, childPosition);
+                ActionDTO child = mBaseExpandableAdapter.getChild(groupPosition, childPosition);
                 Intent intent = null;
 
                 switch (child.getType()) {
@@ -86,7 +84,7 @@ public class ActionListActivity extends ActionBarActivity{
                 }
 
                 if (intent != null) {
-                    intent.putExtra("id", child.getAction_id());
+                    intent.putExtra("id", child.getId());
                     startActivity(intent);
                 }
 
@@ -134,26 +132,52 @@ public class ActionListActivity extends ActionBarActivity{
         tvDiaper = (TextView) findViewById(R.id.tv_home_bottom_diaper);
         tvFeed = (TextView) findViewById(R.id.tv_home_bottom_feed);
 
-        homeTransaction = new HomeTransaction(this);
-
-        setClickListener(ibMedicine, 1);
-        setClickListener(ibSleep, 2);
-        setClickListener(ibDiaper, 3);
-        setClickListener(ibFeed, 4);
-
-    }
-
-    private void setClickListener(ImageButton imageButton, final int type) {
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        ibMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String now = timeUtils.getStringTime(new Date());
 
                 //int id, int type, int count, String time, String detail, String photo
-                Action action = homeTransaction.writeAction(type, new Date(), "");
-
-                mChildList.get(0).add(0, action);
+                ActionDTO medicineAction = new ActionDTO(0, 1, 1, now, "", "1");
+                mChildList.get(0).add(0, medicineAction);
                 tvMedicine.setText(now);
+
+                mBaseExpandableAdapter.notifyDataSetChanged();
+            }
+        });
+
+        ibSleep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String now = timeUtils.getStringTime(new Date());
+                ActionDTO sleepAction = new ActionDTO(0, 2, 1, now, "", "1");
+                mChildList.get(0).add(0, sleepAction);
+                tvSleep.setText(now);
+
+                mBaseExpandableAdapter.notifyDataSetChanged();
+            }
+        });
+
+        ibDiaper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String now = timeUtils.getStringTime(new Date());
+                ActionDTO diaperAction = new ActionDTO(0, 3, 1, now, "", "1");
+                mChildList.get(0).add(0, diaperAction);
+                tvDiaper.setText(now);
+
+                mBaseExpandableAdapter.notifyDataSetChanged();
+            }
+        });
+
+
+        ibFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String now = timeUtils.getStringTime(new Date());
+                ActionDTO feedAction = new ActionDTO(0, 4, 1, now, "", "1");
+                mChildList.get(0).add(0, feedAction);
+                tvFeed.setText(now);
 
                 mBaseExpandableAdapter.notifyDataSetChanged();
             }
@@ -178,9 +202,9 @@ public class ActionListActivity extends ActionBarActivity{
     private void addNewDate() {
         String today = timeUtils.getStringDate(new Date());
 
-        if (mGroupList.isEmpty() || timeUtils.compareDate(mGroupList.get(0))) {
+        if (timeUtils.compareDate(mGroupList.get(0))) {
             mGroupList.add(0, today);
-            mChildList.add(0, new ArrayList<Action>());
+            mChildList.add(0, new ArrayList<ActionDTO>());
         }
     }
 
@@ -201,10 +225,10 @@ public class ActionListActivity extends ActionBarActivity{
 //        return true;
 //    }
 
-    // setup temporary dummy data
-    private void setDummyData() {
-        mGroupList = new ArrayList<>();
-        mChildList = new ArrayList<>();
+//    // setup temporary dummy data
+//    private void setDummyData() {
+//        mGroupList = new ArrayList<>();
+//        mChildList = new ArrayList<>();
 //        ArrayList<ActionDTO> mChildListContent1 = new ArrayList<>();
 //        ArrayList<ActionDTO> mChildListContent2 = new ArrayList<>();
 //        ArrayList<ActionDTO> mChildListContent3 = new ArrayList<>();
@@ -247,5 +271,5 @@ public class ActionListActivity extends ActionBarActivity{
 //
 //        mGroupList.add(0, "2015-07-25");
 //        mChildList.add(0, mChildListContent1);
-    }
+//    }
 }
