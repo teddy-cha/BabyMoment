@@ -23,9 +23,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp">
+        android:layout_weight="5">
 
         <LinearLayout
             android:orientation="vertical"
@@ -44,14 +42,33 @@
                 android:scaleType="fitCenter"
                 android:padding="6dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="no data"
-                android:id="@+id/tv_home_bottom_medicine"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:textSize="10dp" />
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/tv_home_button_medicine_count"
+                    android:layout_gravity="center"
+                    android:textSize="10dp"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="no data"
+                    android:id="@+id/tv_home_bottom_medicine"
+                    android:layout_gravity="center"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -71,14 +88,33 @@
                 android:scaleType="fitCenter"
                 android:padding="6dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="no data"
-                android:id="@+id/tv_home_bottom_sleep"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:textSize="10dp" />
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/tv_home_bottom_sleep_count"
+                    android:layout_gravity="center"
+                    android:textSize="10dp"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="no data"
+                    android:id="@+id/tv_home_bottom_sleep"
+                    android:layout_gravity="center"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -98,14 +134,33 @@
                 android:scaleType="fitCenter"
                 android:padding="6dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="no data"
-                android:id="@+id/tv_home_bottom_diaper"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:textSize="10dp" />
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/tv_home_bottom_diaper_count"
+                    android:layout_gravity="center"
+                    android:textSize="10dp"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="no data"
+                    android:id="@+id/tv_home_bottom_diaper"
+                    android:layout_gravity="center"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -125,14 +180,33 @@
                 android:scaleType="fitCenter"
                 android:padding="6dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="no data"
-                android:id="@+id/tv_home_bottom_feed"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:textSize="10dp" />
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/tv_home_bottom_feed_count"
+                    android:layout_gravity="center"
+                    android:textSize="10dp"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="no data"
+                    android:id="@+id/tv_home_bottom_feed"
+                    android:layout_gravity="center"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

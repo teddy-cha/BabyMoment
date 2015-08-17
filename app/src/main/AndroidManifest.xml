@@ -59,6 +59,18 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light"/>
 
+        <activity
+            android:name=".detail.DiaperActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light"/>
+
+        <activity
+            android:name=".detail.FeedActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light"/>
+
         <!-- activity for daily graph-->
         <activity android:name=".graph.DailyGraph"
                   android:screenOrientation="landscape" >

@@ -1,7 +1,5 @@
 package afterteam.com.babymoment.home;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,20 +8,20 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import afterteam.com.babymoment.R;
-import afterteam.com.babymoment.model.Action;
-import afterteam.com.babymoment.utils.TimeUtils;
 
 
-public class BaseExpandableAdapter extends BaseExpandableListAdapter{
-	
-	private ArrayList<ArrayList<String>> groupList = null;
-	private ArrayList<ArrayList<Action>> childList = null;
+public class BaseExpandableAdapterOld extends BaseExpandableListAdapter{
+
+	private ArrayList<String> groupList = null;
+	private ArrayList<ArrayList<ActionDTO>> childList = null;
 	private LayoutInflater inflater = null;
 	private ViewHolder viewHolder = null;
-	
-	public BaseExpandableAdapter(Context c, ArrayList<ArrayList<String>> groupList,
-			ArrayList<ArrayList<Action>> childList){
+
+	public BaseExpandableAdapterOld(Context c, ArrayList<String> groupList,
+									ArrayList<ArrayList<ActionDTO>> childList){
 		super();
 		this.inflater = LayoutInflater.from(c);
 		this.groupList = groupList;
@@ -33,7 +31,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 	// 그룹 포지션을 반환한다.
 	@Override
 	public String getGroup(int groupPosition) {
-		return groupList.get(groupPosition).get(0);
+		return groupList.get(groupPosition);
 	}
 
 	// 그룹 사이즈를 반환한다.
@@ -77,24 +75,20 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 			viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_left_white);
 		}
 
-		String groupTitle = getGroup(groupPosition);
-		viewHolder.tv_groupName.setText(groupTitle);
-
-
-		ArrayList<Action> child = childList.get(groupPosition);
+		viewHolder.tv_groupName.setText(getGroup(groupPosition));
 
 		// temporary count summery
-		viewHolder.tv_groupSumMedicine.setText(getCount(groupPosition, 1));
-		viewHolder.tv_groupSumSleep.setText(getCount(groupPosition, 2));
-		viewHolder.tv_groupSumDiaper.setText(getCount(groupPosition, 3));
-		viewHolder.tv_groupSumFeed.setText(getCount(groupPosition, 4));
+		viewHolder.tv_groupSumMedicine.setText("2");
+		viewHolder.tv_groupSumSleep.setText("1");
+		viewHolder.tv_groupSumDiaper.setText("2");
+		viewHolder.tv_groupSumFeed.setText("3");
 
 		return v;
 	}
 	
 	// 차일드뷰를 반환한다.
 	@Override
-	public Action getChild(int groupPosition, int childPosition) {
+	public ActionDTO getChild(int groupPosition, int childPosition) {
 		return childList.get(groupPosition).get(childPosition);
 	}
 	
@@ -130,11 +124,10 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 			viewHolder = (ViewHolder)v.getTag();
 		}
 
-		Action action = getChild(groupPosition, childPosition);
-		TimeUtils timeUtils = new TimeUtils();
+		ActionDTO action = getChild(groupPosition, childPosition);
 
 		viewHolder.tv_action_count.setText(Integer.toString(action.getCount()));
-		viewHolder.tv_action_time.setText(timeUtils.getStringTime(action.getTime()));
+		viewHolder.tv_action_time.setText(action.getTime());
 		viewHolder.tv_action_detail.setText(action.getDetail());
 
 		setActionIcon(action.getType());
@@ -163,11 +156,6 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 		public TextView tv_action_time;
 		public TextView tv_action_detail;
 		public ImageView iv_action_photo;
-	}
-
-	public String getCount(int groupPosition, int type) {
-		ArrayList<String> temp = groupList.get(groupPosition);
-		return groupList.get(groupPosition).get(type);
 	}
 
 	private void setActionIcon(int type) {

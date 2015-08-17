@@ -1,10 +1,13 @@
 package afterteam.com.babymoment.model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by chayongbin on 15. 8. 4..
+ * Modified by eunjoo Im on 15. 8. 13
  */
 public class Action extends RealmObject{
 
@@ -13,11 +16,11 @@ public class Action extends RealmObject{
 
     private int         type;
     private int         count;
-    private String      time;
+    private Date        time;
     private String      detail;
     private String      photo;
     // 1:1 관계 테스트
-    private Baby        baby;
+    private String      baby_id;
 
 
     public int getAction_id() {
@@ -44,11 +47,11 @@ public class Action extends RealmObject{
         this.count = count;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
@@ -68,11 +71,11 @@ public class Action extends RealmObject{
         this.photo = photo;
     }
 
-    public Baby getBaby() {
-        return baby;
+    public String getBaby_id() {
+        return baby_id;
     }
 
-    public void setBaby(Baby baby) {
-        this.baby = baby;
+    public void setBaby_id(String baby_id) {
+        this.baby_id = baby_id;
     }
 }
