@@ -16,6 +16,7 @@ public class TimeUtils {
 
     // return String format date / yyyy-MM-dd
     public String getStringDate(Date date) {
+        if (date == null) return null;
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
         return simpleDateFormat.format(date);
     }
@@ -59,6 +60,16 @@ public class TimeUtils {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             return simpleDateFormat.parse(dateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Date getDateFromStringDate(String date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return simpleDateFormat.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }

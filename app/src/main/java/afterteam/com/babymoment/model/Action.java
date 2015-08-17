@@ -7,6 +7,7 @@ import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by chayongbin on 15. 8. 4..
+ * Modified by eunjoo Im on 15. 8. 13
  */
 public class Action extends RealmObject{
 
@@ -19,7 +20,7 @@ public class Action extends RealmObject{
     private String      detail;
     private String      photo;
     // 1:1 관계 테스트
-    private Baby        baby;
+    private String      baby_id;
 
 
     public int getAction_id() {
@@ -70,11 +71,11 @@ public class Action extends RealmObject{
         this.photo = photo;
     }
 
-    public Baby getBaby() {
-        return baby;
+    public String getBaby_id() {
+        return baby_id;
     }
 
-    public void setBaby(Baby baby) {
-        this.baby = baby;
+    public void setBaby_id(String baby_id) {
+        this.baby_id = baby_id;
     }
 }

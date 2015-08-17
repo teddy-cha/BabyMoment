@@ -1,7 +1,5 @@
 package afterteam.com.babymoment.home;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,13 +14,16 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import afterteam.com.babymoment.R;
-import afterteam.com.babymoment.db.HomeTransaction;
+import afterteam.com.babymoment.db.ActionTransaction;
 import afterteam.com.babymoment.detail.DiaperActivity;
 import afterteam.com.babymoment.detail.FeedActivity;
 import afterteam.com.babymoment.detail.MedicineActivity;
 import afterteam.com.babymoment.detail.SleepActivity;
 import afterteam.com.babymoment.model.Action;
+import afterteam.com.babymoment.model.Baby;
 import afterteam.com.babymoment.utils.TimeUtils;
 
 
@@ -32,9 +33,10 @@ public class ActionListActivity extends ActionBarActivity{
     private ArrayList<ArrayList<Action>> mChildList;
     public BaseExpandableAdapter mBaseExpandableAdapter;
     private ImageButton ibMedicine, ibSleep, ibDiaper, ibFeed;
-    private TextView tvMedicine, tvSleep, tvDiaper, tvFeed;
+    private TextView tvMedicine, tvSleep, tvDiaper, tvFeed, tvMedicineCount, tvSleepCount, tvDiaperCount, tvFeedCount;
     private TimeUtils timeUtils;
-    private HomeTransaction homeTransaction;
+    private ActionTransaction actionTransaction;
+    private Baby baby;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,14 @@ public class ActionListActivity extends ActionBarActivity{
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        actionTransaction.closeTransaction();
+    }
+
     private void setActionList() {
+        actionTransaction = new ActionTransaction(this);
         timeUtils = new TimeUtils();
 
         // temporarily input dummy data by hard coding
@@ -134,26 +143,39 @@ public class ActionListActivity extends ActionBarActivity{
         tvDiaper = (TextView) findViewById(R.id.tv_home_bottom_diaper);
         tvFeed = (TextView) findViewById(R.id.tv_home_bottom_feed);
 
-        homeTransaction = new HomeTransaction(this);
+        tvMedicineCount = (TextView) findViewById(R.id.tv_home_button_medicine_count);
+        tvSleepCount = (TextView) findViewById(R.id.tv_home_bottom_sleep_count);
+        tvDiaperCount = (TextView) findViewById(R.id.tv_home_bottom_diaper_count);
+        tvFeedCount = (TextView) findViewById(R.id.tv_home_bottom_feed_count);
 
-        setClickListener(ibMedicine, 1);
-        setClickListener(ibSleep, 2);
-        setClickListener(ibDiaper, 3);
-        setClickListener(ibFeed, 4);
+        setClickListener(1, ibMedicine, tvMedicine, tvMedicineCount);
+        setClickListener(2, ibSleep, tvSleep, tvSleepCount);
+        setClickListener(3, ibDiaper, tvDiaper, tvDiaperCount);
+        setClickListener(4, ibFeed, tvFeed, tvFeedCount);
 
+        setButtonText(1, tvMedicine, tvMedicineCount);
+        setButtonText(2, tvSleep, tvSleepCount);
+        setButtonText(3, tvDiaper, tvDiaperCount);
+        setButtonText(4, tvFeed, tvFeedCount);
     }
 
-    private void setClickListener(ImageButton imageButton, final int type) {
+    private void setButtonText(int type, final TextView textView, final TextView textViewCount) {
+        textView.setText(actionTransaction.getActionTime(type, new Date()));
+        textViewCount.setText(String.valueOf(actionTransaction.getActionCount(type, new Date())));
+    }
+
+    private void setClickListener(final int type, ImageButton imageButton, final TextView textView, final TextView textViewCount) {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String now = timeUtils.getStringTime(new Date());
 
                 //int id, int type, int count, String time, String detail, String photo
-                Action action = homeTransaction.writeAction(type, new Date(), "");
+                Action action = actionTransaction.writeAction(baby.getBaby_id(), type, new Date(), "");
 
                 mChildList.get(0).add(0, action);
-                tvMedicine.setText(now);
+                textView.setText(now);
+                textViewCount.setText(String.valueOf(action.getCount()));
 
                 mBaseExpandableAdapter.notifyDataSetChanged();
             }
@@ -205,6 +227,19 @@ public class ActionListActivity extends ActionBarActivity{
     private void setDummyData() {
         mGroupList = new ArrayList<>();
         mChildList = new ArrayList<>();
+        baby = new Baby();
+        baby.setBaby_id("1");
+        ArrayList<Action> mChildListContent;
+
+        ArrayList<String> dateList = actionTransaction.readAllAction(baby.getBaby_id());
+
+        for (String date : dateList) {
+            mGroupList.add(0, date);
+
+            mChildListContent = actionTransaction.readDailyAction(baby.getBaby_id(), date);
+            mChildList.add(0, mChildListContent);
+
+        }
 //        ArrayList<ActionDTO> mChildListContent1 = new ArrayList<>();
 //        ArrayList<ActionDTO> mChildListContent2 = new ArrayList<>();
 //        ArrayList<ActionDTO> mChildListContent3 = new ArrayList<>();
