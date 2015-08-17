@@ -1,7 +1,6 @@
 package afterteam.com.babymoment.db;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,6 +76,20 @@ public class ActionTransaction {
         return resultArray;
     }
 
+
+    public ArrayList<String> readTitleCount(String baby_id, String date) {
+
+        ArrayList<String> resultArray = new ArrayList<>();
+
+        resultArray.add(date);
+
+        for (int i = 1; i < 5; i++) {
+            resultArray.add(String.valueOf(readActionCount(baby_id, date, i)));
+        }
+
+        return resultArray;
+    }
+
     public int readActionCount(String baby_id, String date, int type) {
 
         ArrayList<Action> resultArray = readDailyAction(baby_id, date);
@@ -115,7 +128,7 @@ public class ActionTransaction {
                 action[0].setAction_id(getNextKey());
                 action[0].setType(type);
                 action[0].setTime(time);
-                action[0].setCount(getActionCount(type, time) + 1);
+                action[0].setCount(getTodayActionCount(type, time) + 1);
                 action[0].setDetail(detail);
 
                 // temporary photo index and baby
@@ -127,8 +140,8 @@ public class ActionTransaction {
         return action[0];
     }
 
-    // get action count
-    public int getActionCount(int type, Date time) {
+    // get today action count
+    public int getTodayActionCount(int type, Date time) {
         RealmQuery<Action> query = realm.where(Action.class);
         Date today = getMidnight(new Date());
 
@@ -151,12 +164,15 @@ public class ActionTransaction {
         RealmResults<Action> result = query.findAll();
         result.sort("count", RealmResults.SORT_ORDER_DESCENDING);
 
+        if (result.isEmpty()) return "no data";
+
         return timeUtils.getStringTime(result.first().getTime());
     }
 
     // set midnight of designated date
     private Date getMidnight(Date date) {
         String midnight =  timeUtils.getStringDate(date) + " 00:00:00";
+
         return timeUtils.getDate(midnight);
     }
 

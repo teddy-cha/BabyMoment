@@ -6,6 +6,7 @@ import java.util.Date;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -13,8 +14,7 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import android.widget.Toast;
 
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.db.ActionTransaction;
@@ -29,7 +29,8 @@ import afterteam.com.babymoment.utils.TimeUtils;
 
 public class ActionListActivity extends ActionBarActivity{
 
-    private ArrayList<String> mGroupList;
+    private ArrayList<String> mDateList;
+    private ArrayList<ArrayList<String>> mTitleList;
     private ArrayList<ArrayList<Action>> mChildList;
     public BaseExpandableAdapter mBaseExpandableAdapter;
     private ImageButton ibMedicine, ibSleep, ibDiaper, ibFeed;
@@ -59,13 +60,13 @@ public class ActionListActivity extends ActionBarActivity{
         actionTransaction = new ActionTransaction(this);
         timeUtils = new TimeUtils();
 
-        // temporarily input dummy data by hard coding
-        setDummyData();
+        // add data
+        setData();
 
         // add new date to expendable list if necessary
         addNewDate();
 
-        mBaseExpandableAdapter = new BaseExpandableAdapter(this, mGroupList, mChildList);
+        mBaseExpandableAdapter = new BaseExpandableAdapter(this, mTitleList, mChildList);
         mListView.setAdapter(mBaseExpandableAdapter);
 
         // child click event
@@ -161,7 +162,7 @@ public class ActionListActivity extends ActionBarActivity{
 
     private void setButtonText(int type, final TextView textView, final TextView textViewCount) {
         textView.setText(actionTransaction.getActionTime(type, new Date()));
-        textViewCount.setText(String.valueOf(actionTransaction.getActionCount(type, new Date())));
+        textViewCount.setText(String.valueOf(actionTransaction.getTodayActionCount(type, new Date())));
     }
 
     private void setClickListener(final int type, ImageButton imageButton, final TextView textView, final TextView textViewCount) {
@@ -173,11 +174,18 @@ public class ActionListActivity extends ActionBarActivity{
                 //int id, int type, int count, String time, String detail, String photo
                 Action action = actionTransaction.writeAction(baby.getBaby_id(), type, new Date(), "");
 
+                ArrayList<String> updated = mTitleList.get(0);
+                updated.set(action.getType(), String.valueOf(action.getCount()));
+                mTitleList.set(0, updated);
                 mChildList.get(0).add(0, action);
                 textView.setText(now);
                 textViewCount.setText(String.valueOf(action.getCount()));
 
                 mBaseExpandableAdapter.notifyDataSetChanged();
+
+                Toast toast = Toast.makeText(getApplicationContext(), "데이터를 입력합니다.", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }
         });
     }
@@ -200,32 +208,16 @@ public class ActionListActivity extends ActionBarActivity{
     private void addNewDate() {
         String today = timeUtils.getStringDate(new Date());
 
-        if (mGroupList.isEmpty() || timeUtils.compareDate(mGroupList.get(0))) {
-            mGroupList.add(0, today);
+        if (mDateList.isEmpty() || timeUtils.compareDate(mDateList.get(0))) {
+            mDateList.add(0, today);
             mChildList.add(0, new ArrayList<Action>());
         }
     }
 
-//    // compare today and latest data
-//    private Boolean compareDate(String today) {
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
-//
-//        try {
-//            Date todayDate = simpleDateFormat.parse(today);
-//            Date latestDate = simpleDateFormat.parse(mGroupList.get(0));
-//
-//            String test = String.valueOf(todayDate.after(latestDate));
-//
-//            return todayDate.after(latestDate);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return true;
-//    }
-
-    // setup temporary dummy data
-    private void setDummyData() {
-        mGroupList = new ArrayList<>();
+    // setup data
+    private void setData() {
+        mDateList = new ArrayList<>();
+        mTitleList = new ArrayList<>();
         mChildList = new ArrayList<>();
         baby = new Baby();
         baby.setBaby_id("1");
@@ -234,53 +226,13 @@ public class ActionListActivity extends ActionBarActivity{
         ArrayList<String> dateList = actionTransaction.readAllAction(baby.getBaby_id());
 
         for (String date : dateList) {
-            mGroupList.add(0, date);
+            mDateList.add(0, date);
+
+            mTitleList.add(0, actionTransaction.readTitleCount(baby.getBaby_id(), date));
 
             mChildListContent = actionTransaction.readDailyAction(baby.getBaby_id(), date);
             mChildList.add(0, mChildListContent);
 
         }
-//        ArrayList<ActionDTO> mChildListContent1 = new ArrayList<>();
-//        ArrayList<ActionDTO> mChildListContent2 = new ArrayList<>();
-//        ArrayList<ActionDTO> mChildListContent3 = new ArrayList<>();
-//
-//        ActionDTO test11 = new ActionDTO(1, 2, 1, "AM 06:30", "~ AM 09:00", "3");
-//        ActionDTO test12 = new ActionDTO(2, 4, 1, "AM 09:00", "250ml", "2");
-//        ActionDTO test13 = new ActionDTO(3, 3, 1, "AM 09:05", "poo, picture", "1");
-//        ActionDTO test14 = new ActionDTO(4, 4, 2, "AM 09:09", "왼쪽, 10분", "1");
-//        ActionDTO test15 = new ActionDTO(5, 2, 2, "AM 09:10", "~ AM 10:00", "1");
-//        ActionDTO test16 = new ActionDTO(6, 1, 2, "AM 10:00", "콧물", "3");
-//        ActionDTO test17 = new ActionDTO(7, 3, 2, "AM 10:05", "pee", "2");
-//        ActionDTO test18 = new ActionDTO(8, 3, 3, "AM 10:10", "", "1");
-//
-//        mChildListContent1.add(test11);
-//        mChildListContent1.add(test12);
-//        mChildListContent1.add(test13);
-//        mChildListContent1.add(test14);
-//        mChildListContent1.add(test15);
-//        mChildListContent1.add(test16);
-//        mChildListContent1.add(test17);
-//        mChildListContent1.add(test18);
-//
-//        mChildListContent2.add(test11);
-//        mChildListContent2.add(test12);
-//        mChildListContent2.add(test13);
-//        mChildListContent2.add(test14);
-//        mChildListContent2.add(test15);
-//        mChildListContent2.add(test16);
-//
-//        mChildListContent3.add(test11);
-//        mChildListContent3.add(test12);
-//        mChildListContent3.add(test13);
-//        mChildListContent3.add(test14);
-//
-//        mGroupList.add(0, "2015-07-23");
-//        mChildList.add(0, mChildListContent3);
-//
-//        mGroupList.add(0, "2015-07-24");
-//        mChildList.add(0, mChildListContent2);
-//
-//        mGroupList.add(0, "2015-07-25");
-//        mChildList.add(0, mChildListContent1);
     }
 }

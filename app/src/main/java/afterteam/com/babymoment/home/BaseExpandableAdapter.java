@@ -17,12 +17,12 @@ import afterteam.com.babymoment.utils.TimeUtils;
 
 public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 	
-	private ArrayList<String> groupList = null;
+	private ArrayList<ArrayList<String>> groupList = null;
 	private ArrayList<ArrayList<Action>> childList = null;
 	private LayoutInflater inflater = null;
 	private ViewHolder viewHolder = null;
 	
-	public BaseExpandableAdapter(Context c, ArrayList<String> groupList, 
+	public BaseExpandableAdapter(Context c, ArrayList<ArrayList<String>> groupList,
 			ArrayList<ArrayList<Action>> childList){
 		super();
 		this.inflater = LayoutInflater.from(c);
@@ -33,7 +33,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 	// 그룹 포지션을 반환한다.
 	@Override
 	public String getGroup(int groupPosition) {
-		return groupList.get(groupPosition);
+		return groupList.get(groupPosition).get(0);
 	}
 
 	// 그룹 사이즈를 반환한다.
@@ -77,13 +77,17 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 			viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_left_white);
 		}
 
-		viewHolder.tv_groupName.setText(getGroup(groupPosition));
+		String groupTitle = getGroup(groupPosition);
+		viewHolder.tv_groupName.setText(groupTitle);
+
+
+		ArrayList<Action> child = childList.get(groupPosition);
 
 		// temporary count summery
-		viewHolder.tv_groupSumMedicine.setText("2");
-		viewHolder.tv_groupSumSleep.setText("1");
-		viewHolder.tv_groupSumDiaper.setText("2");
-		viewHolder.tv_groupSumFeed.setText("3");
+		viewHolder.tv_groupSumMedicine.setText(getCount(groupPosition, 1));
+		viewHolder.tv_groupSumSleep.setText(getCount(groupPosition, 2));
+		viewHolder.tv_groupSumDiaper.setText(getCount(groupPosition, 3));
+		viewHolder.tv_groupSumFeed.setText(getCount(groupPosition, 4));
 
 		return v;
 	}
@@ -159,6 +163,11 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 		public TextView tv_action_time;
 		public TextView tv_action_detail;
 		public ImageView iv_action_photo;
+	}
+
+	public String getCount(int groupPosition, int type) {
+		ArrayList<String> temp = groupList.get(groupPosition);
+		return groupList.get(groupPosition).get(type);
 	}
 
 	private void setActionIcon(int type) {
