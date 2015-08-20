@@ -1,117 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal"
-    android:baselineAligned="false"
-android:showDividers="none">
+android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+    android:baselineAligned="false" android:showDividers="none">
 
     <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:paddingTop="6dp">
-
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/btn_home_bottom_sleep"
-        android:layout_gravity="center"
-        android:background="@drawable/shape_main_button_sleep_bg"
-        android:src="@drawable/icon_sleep_white"
-        android:scaleType="fitCenter"
-        android:padding="6dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="no data"
-        android:id="@+id/tv_home_bottom_sleep"
-        android:layout_gravity="center"
-        android:textSize="10dp" />
-</LinearLayout>
-
-    <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:paddingTop="6dp">
-
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/btn_home_bottom_diaper"
-        android:layout_gravity="center"
-        android:background="@drawable/shape_main_button_diaper_bg"
-        android:src="@drawable/icon_diaper_white"
-        android:scaleType="fitCenter"
-        android:padding="6dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="no data"
-        android:id="@+id/tv_home_bottom_diaper"
-        android:layout_gravity="center"
-        android:textSize="10dp" />
-</LinearLayout>
-
-    <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:paddingTop="6dp">
-
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/btn_home_bottom_feed"
-        android:layout_gravity="center"
-        android:background="@drawable/shape_main_button_feed_bg"
-        android:src="@drawable/icon_feed_white"
-        android:scaleType="fitCenter"
-        android:padding="6dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="no data"
-        android:id="@+id/tv_home_bottom_feed"
-        android:layout_gravity="center"
-        android:textSize="10dp" />
-</LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="6dp">
+        android:layout_weight="5">
 
-        <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/btn_home_bottom_medicine"
-            android:layout_gravity="center"
-            android:background="@drawable/shape_main_button_medicine_bg"
-            android:src="@drawable/icon_medicine_white"
-            android:scaleType="fitCenter"
-            android:padding="6dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="6dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="no data"
-            android:id="@+id/tv_home_bottom_medicine"
-            android:layout_gravity="center"
-            android:textSize="10dp" />
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/btn_home_bottom_medicine"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_main_button_medicine_bg"
+                android:src="@drawable/icon_medicine_white"
+                android:scaleType="fitCenter"
+                android:padding="6dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/tv_home_bottom_medicine_count"
+                    android:layout_gravity="center"
+                    android:textSize="10dp"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="no data"
+                    android:id="@+id/tv_home_bottom_medicine"
+                    android:layout_gravity="center"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="6dp">
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/btn_home_bottom_sleep"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_main_button_sleep_bg"
+                android:src="@drawable/icon_sleep_white"
+                android:scaleType="fitCenter"
+                android:padding="6dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/tv_home_bottom_sleep_count"
+                    android:layout_gravity="center"
+                    android:textSize="10dp"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="no data"
+                    android:id="@+id/tv_home_bottom_sleep"
+                    android:layout_gravity="center"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="6dp">
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/btn_home_bottom_diaper"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_main_button_diaper_bg"
+                android:src="@drawable/icon_diaper_white"
+                android:scaleType="fitCenter"
+                android:padding="6dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/tv_home_bottom_diaper_count"
+                    android:layout_gravity="center"
+                    android:textSize="10dp"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="no data"
+                    android:id="@+id/tv_home_bottom_diaper"
+                    android:layout_gravity="center"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="6dp">
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/btn_home_bottom_feed"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_main_button_feed_bg"
+                android:src="@drawable/icon_feed_white"
+                android:scaleType="fitCenter"
+                android:padding="6dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="0"
+                    android:id="@+id/tv_home_bottom_feed_count"
+                    android:layout_gravity="center"
+                    android:textSize="10dp"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="no data"
+                    android:id="@+id/tv_home_bottom_feed"
+                    android:layout_gravity="center"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 
 </LinearLayout>

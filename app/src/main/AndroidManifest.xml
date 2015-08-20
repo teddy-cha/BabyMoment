@@ -94,6 +94,7 @@
                 <action android:name="com.babymoment.widget.Medicine"/>
             </intent-filter>
         </receiver>
+        <service android:name=".widget.WidgetService"></service>
 
     </application>
 
