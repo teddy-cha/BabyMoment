@@ -1,8 +1,5 @@
 package afterteam.com.babymoment.home;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +12,9 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.db.ActionTransaction;
@@ -234,5 +234,11 @@ public class ActionListActivity extends ActionBarActivity{
             mChildList.add(0, mChildListContent);
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setActionList();
     }
 }
