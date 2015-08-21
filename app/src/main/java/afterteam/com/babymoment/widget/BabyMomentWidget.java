@@ -4,9 +4,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -32,6 +32,10 @@ public class BabyMomentWidget extends AppWidgetProvider{
     private ActionTransaction actionTransaction;
     private PendingIntent service = null;
 
+
+    private Handler mHandler;
+    private Runnable mRunnable;
+
     @Override
     public void onEnabled(Context context) {
         Log.i(TAG, "OnEnabled");
@@ -40,7 +44,6 @@ public class BabyMomentWidget extends AppWidgetProvider{
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        init(context, appWidgetManager, appWidgetIds);
 
         final AlarmManager m = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -56,7 +59,11 @@ public class BabyMomentWidget extends AppWidgetProvider{
             service = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         }
 
-        m.setRepeating(AlarmManager.RTC, TIME.getTime().getTime(), 1000 * 60 * 10, service);
+        long aSecondFromNow = System.currentTimeMillis() + 1 * 1000;
+        m.set(AlarmManager.RTC_WAKEUP, aSecondFromNow , service);
+        Log.i(TAG, "1s alarm~");
+        m.setRepeating(AlarmManager.RTC, TIME.getTime().getTime(), 1000 * 60 * 100, service);
+        init(context, appWidgetManager, appWidgetIds);
 //        super.onUpdate(context, appWidgetManager, appWidgetIds);
 //        this.context = context;
 //        init(context, appWidgetManager, appWidgetIds);
@@ -64,9 +71,11 @@ public class BabyMomentWidget extends AppWidgetProvider{
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_widget);
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+
+        Log.i(TAG, "OnUpdated");
     }
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
         super.onReceive(context, intent);
 
         Baby baby = new Baby();
@@ -89,16 +98,30 @@ public class BabyMomentWidget extends AppWidgetProvider{
             Log.i(TAG, "writeActionMedi");
         }
 
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName cpName = new ComponentName(context, BabyMomentWidget.class);
-        appWidgetManager.updateAppWidget(cpName, rv);
+//        mRunnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(context, WidgetService.class);
+//                context.startService(intent);
+//            }
+//        };
+//
+//        mHandler = new Handler();
+//        mHandler.postDelayed(mRunnable, 300);
+
+//        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+//        ComponentName cpName = new ComponentName(context, BabyMomentWidget.class);
+//        appWidgetManager.updateAppWidget(cpName, rv);
 
     }
 
     @Override
     public void onDisabled(Context context) {
         super.onDisabled(context);
+        final AlarmManager m = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        m.cancel(service);
     }
+
 
     public void init(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_widget);

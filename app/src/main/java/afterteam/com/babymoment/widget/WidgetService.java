@@ -57,11 +57,11 @@ public class WidgetService extends Service {
         rv.setTextViewText(R.id.tv_home_bottom_diaper, diaper_time);
         rv.setTextViewText(R.id.tv_home_bottom_feed, feed_time);
 
-        Log.i(TAG, "service update!!!!!");
         ComponentName thisWidget = new ComponentName(this, BabyMomentWidget.class);
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
         manager.updateAppWidget(thisWidget, rv);
 
+        Log.i(TAG, "doUpdated");
 
     }
 
