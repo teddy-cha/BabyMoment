@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -12,6 +13,7 @@ import android.view.WindowManager;
  */
 public class SizeUtils {
 
+    private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
     private Display display;
     private DisplayMetrics metrics;
     private int width, height;
@@ -32,31 +34,30 @@ public class SizeUtils {
 
     private void getDefaultSize() {
 
-        // since SDK_INT = 1;
         width = metrics.widthPixels;
         height = metrics.heightPixels;
-        // includes window decorations (statusbar bar/menu bar)
+
         if (Build.VERSION.SDK_INT >= 14 && Build.VERSION.SDK_INT < 17)
             try {
                 width = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
                 height = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        // includes window decorations (statusbar bar/menu bar)
+
         if (Build.VERSION.SDK_INT >= 17)
             try {
                 Point realSize = new Point();
                 Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
                 width = realSize.x;
                 height = realSize.y;
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+        Log.i(TAG, "width: "+ width + "height: " + height);
+
     }
 }
-
-//        Point size = new Point();
-//        display.getSize(size);
-//        int width = size.x;
-//        int height = size.y;
 
 

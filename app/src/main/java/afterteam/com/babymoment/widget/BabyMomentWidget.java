@@ -16,6 +16,7 @@ import java.util.Date;
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.db.ActionTransaction;
 import afterteam.com.babymoment.model.Baby;
+import afterteam.com.babymoment.utils.ActionType;
 import afterteam.com.babymoment.utils.LogUtils;
 
 /**
@@ -59,14 +60,9 @@ public class BabyMomentWidget extends AppWidgetProvider{
             service = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         }
 
-        long aSecondFromNow = System.currentTimeMillis() + 1 * 1000;
-        m.set(AlarmManager.RTC_WAKEUP, aSecondFromNow , service);
-        Log.i(TAG, "1s alarm~");
-        m.setRepeating(AlarmManager.RTC, TIME.getTime().getTime(), 1000 * 60 * 100, service);
+        m.setRepeating(AlarmManager.RTC, TIME.getTime().getTime(), 1000 * 60 * 10, service);
         init(context, appWidgetManager, appWidgetIds);
-//        super.onUpdate(context, appWidgetManager, appWidgetIds);
-//        this.context = context;
-//        init(context, appWidgetManager, appWidgetIds);
+
         for (int appWidgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_widget);
             appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -85,18 +81,23 @@ public class BabyMomentWidget extends AppWidgetProvider{
 
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.layout_widget);
         if(intent.getAction().equals(ACTION_FEED)){
-            actionTransaction.writeAction(baby.getBaby_id(), 4, new Date(), "");
+            actionTransaction.writeAction(baby.getBaby_id(), ActionType.FEED, new Date(), "");
+            actionTransaction.closeTransaction();
             Log.i(TAG, "writeActionFeed");
         }else if(intent.getAction().equals(ACTION_SLEEP)){
-            actionTransaction.writeAction(baby.getBaby_id(), 2, new Date(), "");
+            actionTransaction.writeAction(baby.getBaby_id(), ActionType.SLEEP, new Date(), "");
+            actionTransaction.closeTransaction();
             Log.i(TAG, "writeActionSleep");
         }if(intent.getAction().equals(ACTION_DIAPER)){
-            actionTransaction.writeAction(baby.getBaby_id(), 3, new Date(), "");
+            actionTransaction.writeAction(baby.getBaby_id(), ActionType.DIAPER, new Date(), "");
+            actionTransaction.closeTransaction();
             Log.i(TAG, "writeActionDiaper");
         }if(intent.getAction().equals(ACTION_MEDICINE)){
-            actionTransaction.writeAction(baby.getBaby_id(), 1, new Date(), "");
+            actionTransaction.writeAction(baby.getBaby_id(), ActionType.MEDICINE, new Date(), "");
+            actionTransaction.closeTransaction();
             Log.i(TAG, "writeActionMedi");
         }
+
 
         mRunnable = new Runnable() {
             @Override
@@ -107,7 +108,7 @@ public class BabyMomentWidget extends AppWidgetProvider{
         };
 
         mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 300);
+        mHandler.postDelayed(mRunnable, 400);
 
 //        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 //        ComponentName cpName = new ComponentName(context, BabyMomentWidget.class);
@@ -121,7 +122,6 @@ public class BabyMomentWidget extends AppWidgetProvider{
         final AlarmManager m = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         m.cancel(service);
     }
-
 
     public void init(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_widget);

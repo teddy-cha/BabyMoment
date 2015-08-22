@@ -196,7 +196,7 @@ public class ActionTransaction {
                 .lessThan("time", nextDate);
 
         RealmResults<Action> results = query.findAll();
-        results.sort("time", RealmResults.SORT_ORDER_DESCENDING);
+        results.sort("time", RealmResults.SORT_ORDER_ASCENDING);
 
         for (Action action : results) {
             resultArray.add(action);
@@ -204,4 +204,5 @@ public class ActionTransaction {
 
         return resultArray;
     }
+
 }

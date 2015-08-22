@@ -1,7 +1,6 @@
 package afterteam.com.babymoment.graph;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,12 +11,13 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.db.ActionTransaction;
 import afterteam.com.babymoment.model.Action;
 import afterteam.com.babymoment.model.Baby;
+import afterteam.com.babymoment.utils.ActionType;
+import afterteam.com.babymoment.utils.LogUtils;
 import afterteam.com.babymoment.utils.SizeUtils;
 import afterteam.com.babymoment.utils.TimeUtils;
 
@@ -26,17 +26,21 @@ import afterteam.com.babymoment.utils.TimeUtils;
  */
 public class DrawingView extends View{
 
-    private Paint feedPaint, cPaint, textPaint, textPaint2, sleepPaint, diaperPaint, medicinePaint;
-    private int w_unit, h_unit;
-    int comparingTime;
-    Context context;
+        private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
+        private Paint feedPaint, cPaint, textPaint, textPaint2, sleepPaint, diaperPaint, medicinePaint;
+        private int w_unit, h_unit;
+        private String baby_id, date;
+        private Context context;
+        private TimeUtils tu;
 
-        public DrawingView(Context context) {
+        public DrawingView(Context context, String baby_id, String date) {
             super(context);
             this.context = context;
+            this.baby_id= baby_id;
+            this.date = date;
             paintSetting();
             SizeUtils su = new SizeUtils(getContext());
-            // Toast.makeText(getApplicationContext(), "size~~: "+ w + ", "+h, Toast.LENGTH_SHORT).show();
+
             w_unit = ( su.getWidth() / 27);
             h_unit = ( su.getHeight() / 6);
         }
@@ -78,102 +82,60 @@ public class DrawingView extends View{
         }
 
         public void onDraw(Canvas canvas) {
+
             canvas.drawColor(Color.WHITE);
 
-            Resources r = getContext().getResources();
-
-            Bitmap milk = BitmapFactory.decodeResource(r, R.drawable.icon_feed_scarlet);
-            Bitmap sleep = BitmapFactory.decodeResource(r, R.drawable.icon_sleep_green);
-            Bitmap diaper = BitmapFactory.decodeResource(r, R.drawable.icon_diper_yellow);
-            Bitmap diaper2 = BitmapFactory.decodeResource(r, R.drawable.icon_diper_orange);
-            Bitmap medicine = BitmapFactory.decodeResource(r, R.drawable.icon_medicine_sky);
+            Bitmap milk = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_feed_scarlet);
+            Bitmap sleep = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_sleep_green);
+            Bitmap diaper = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_diper_yellow);
+            Bitmap diaper2 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_diper_orange);
+            Bitmap medicine = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_medicine_sky);
 
             Baby baby = new Baby();
             baby.setBaby_id("1");
 
             ActionTransaction transaction = new ActionTransaction(context);
-            TimeUtils tu = new TimeUtils();
+            tu = new TimeUtils();
 
-            ArrayList<Action> feedList = transaction.readActionPerType("1", tu.getStringDate(new Date()), 4);
-            for(int i = 1; i < feedList.size(); i++){
-                int idx=1;
+            ArrayList<Action> mediList = transaction.readActionPerType(baby_id, date, ActionType.MEDICINE);
+            ArrayList<Action> sleepList = transaction.readActionPerType(baby_id, date, ActionType.SLEEP);
+            ArrayList<Action> diaperList = transaction.readActionPerType(baby_id, date, ActionType.DIAPER);
+            ArrayList<Action> feedList = transaction.readActionPerType(baby_id, date, ActionType.FEED);
 
 
-                Action action = feedList.get(i);
-                Action action2 = feedList.get(i-1);
+            drawGraph(canvas, mediList, ActionType.MEDICINE, medicine);
+            drawGraph(canvas, sleepList, ActionType.SLEEP, sleep);
+            drawGraph(canvas, diaperList, ActionType.DIAPER, diaper2);
+            drawGraph(canvas, feedList, ActionType.FEED, milk);
 
-                if(tu.getIntHour(action.getTime()) != tu.getIntHour(action2.getTime())) {
-                    drawType(canvas, w_unit * (1 + tu.getIntHour(action.getTime())), h_unit * 4, milk);
-                    //  drawType(canvas, w_unit * 7, h_unit * 4, milk);
-                    Log.i("test", "i: " + i + " " + tu.getStringDateTimeForGraph(action.getTime()));
-                }else if(tu.getIntHour(action.getTime()) == tu.getIntHour(action2.getTime())){
-                    idx++;
-                    drawType(canvas, w_unit * (1 + tu.getIntHour(action.getTime())), h_unit * 4, milk);
-                    drawMultipleMark("feed", canvas, w_unit * (1 + tu.getIntHour(action.getTime())), h_unit * 4, idx);
+            //수면 종료시간 확인가능하면 수정할 부분
+    //            drawType(canvas, w_unit * 19, h_unit * 2, sleep);
+    //            drawSleep(canvas, w_unit * 19, h_unit * 2, (w_unit * 20), (h_unit * 2) + 50);
+
+            drawBasic(canvas);
+
+
+        }
+
+        private void drawGraph(Canvas canvas, ArrayList<Action> list, int type, Bitmap bitmap) {
+            int idx =0;
+            int temp = 1;
+
+            for(int i = 1; i < list.size(); i++){
+                Action action = list.get(i);
+                Log.i(TAG, "listname: "+action.getType() +"test i: " + i + " " + tu.getStringDateTimeForGraph(action.getTime()));
+                int hour = tu.getIntHour(action.getTime());
+                if(idx != hour){
+                    idx = hour;
+                    drawType(canvas, w_unit * (2 + hour), h_unit * type, bitmap);
+                    temp = 1;
+                }else if(idx == hour){
+                    temp++;
                 }
-
-
+                if(temp > 1) {
+                    drawMultipleMark(type, canvas, w_unit * (2 + hour), h_unit * type, temp);
+                }
             }
-
-
-//
-//type 하루치를 종류별?로 또는 전체를 찾아서
-//                DBCursor cursorDoc = collection.find();
-//                while (cursorDoc.hasNext()) {
-//                    System.out.println(cursorDoc.next());
-//                   String tempType = jsonObject.get("type");
-//                   String tempTime =  jsonObject.get("time");
-//                   int tempHour = Integer.parseInt(tempTime.substring(9, 10));
-//                    comparingTime = tempHour;
-//                     if(comparingTime == tempHour){
-//                count++;
-//            }else{
-//                comparingTime = 0;
-//
-//                    drawType(canvas, w_unit*(tempHour+2), h_unit * 4, milk);
-//
-//          }
-////                }
-
-//json parsing이전 테스트용
-//            drawType(canvas, w_unit * 7, h_unit * 4, milk);
-//            drawType(canvas, w_unit * 23, h_unit * 4, milk);
-//            drawType(canvas, w_unit * 17, h_unit * 4, milk);
-//            drawType(canvas, w_unit * 14, h_unit * 4, milk);
-//            drawType(canvas, w_unit * 6, h_unit * 4, milk);
-//            drawType(canvas, w_unit * 21, h_unit * 4, milk);
-//            drawType(canvas, w_unit * 2, h_unit * 4, milk);
-//            drawMultipleMark("feed", canvas, w_unit * 7, h_unit * 4, 3);
-//            drawType(canvas, w_unit * 18, h_unit * 4, milk);
-//            drawType(canvas, w_unit * 13, h_unit * 4, milk);
-//            drawType(canvas, w_unit * 12, h_unit * 1, medicine);
-//            drawMultipleMark("medicine", canvas, w_unit * 12, h_unit * 1, 2);
-//            drawType(canvas, w_unit * 12, h_unit * 3, diaper);
-//            drawType(canvas, w_unit * 2, h_unit * 3, diaper);
-//            drawMultipleMark("diaper", canvas, w_unit * 2, h_unit * 3, 2);
-//            drawType(canvas, w_unit * 6, h_unit * 3, diaper2);
-//            drawType(canvas, w_unit * 7, h_unit * 3, diaper);
-//            drawType(canvas, w_unit * 16, h_unit * 3, diaper);
-//            drawType(canvas, w_unit * 21, h_unit * 3, diaper2);
-//            drawType(canvas, w_unit * 2, h_unit * 3, diaper);
-//
-//
-//            drawType(canvas, w_unit * 7 + 30, h_unit * 2, sleep);
-//            drawSleep(canvas, w_unit * 7 + 30, h_unit * 2, (w_unit * 11) + 80, (h_unit * 2) + 50);
-//
-//            drawType(canvas, w_unit * 22, h_unit * 2, sleep);
-//            drawSleep(canvas, w_unit * 22, h_unit * 2, (w_unit * 27), (h_unit * 2) + 50);
-//
-//            drawType(canvas, w_unit * 3, h_unit * 2, sleep);
-//            drawSleep(canvas, w_unit * 3, h_unit * 2, (w_unit * 6), (h_unit * 2) + 50);
-//
-//            drawType(canvas, w_unit * 19, h_unit * 2, sleep);
-//            drawSleep(canvas, w_unit * 19, h_unit * 2, (w_unit * 20), (h_unit * 2) + 50);
-
-
-            drawText(canvas);
-
-
         }
 
 
@@ -190,40 +152,35 @@ public class DrawingView extends View{
 
         }
 
-        private void drawMultipleMark(String type, Canvas canvas, int a, int b, int count) {
+        private void drawMultipleMark(int type, Canvas canvas, int a, int b, int count) {
 
-            //2개 표시 샘플
             switch(type){
-                case "feed":
-                    canvas.drawCircle(a + 45, b + 40, 15, feedPaint);
+                case ActionType.MEDICINE:
+                    canvas.drawCircle(a + 45, b + 40, 15, medicinePaint);
                     canvas.drawText(count + "", a + 40, b + 48, textPaint2);
                     break;
-                case "diaper":
-                    canvas.drawCircle(a + 45, b + 40, 15, diaperPaint);
-                    canvas.drawText(count + "", a + 40, b + 48, textPaint2);
-                    break;
-                case "sleep":
+                case ActionType.SLEEP:
                     canvas.drawCircle(a + 45, b + 40, 15, sleepPaint);
                     canvas.drawText(count + "", a + 40, b + 48, textPaint2);
                     break;
-                case "medicine":
-                    canvas.drawCircle(a + 45, b + 40, 15, medicinePaint);
+                case ActionType.DIAPER:
+                    canvas.drawCircle(a + 45, b + 40, 15, diaperPaint);
+                    canvas.drawText(count + "", a + 40, b + 48, textPaint2);
+                    break;
+                case ActionType.FEED:
+                    canvas.drawCircle(a + 45, b + 40, 15, feedPaint);
                     canvas.drawText(count + "", a + 40, b + 48, textPaint2);
                     break;
                 default : break;
             }
         }
 
-        private void drawText(Canvas canvas) {
+        private void drawBasic(Canvas canvas) {
 
             SizeUtils su = new SizeUtils(context);
-            w_unit = (su.getWidth() / 27);
-            h_unit = (su.getHeight() / 6);
 
-            //db날짜 파싱해서 넣기로 대체 예정
-            String temp = new Date().toString().substring(0, 10) + " " + new Date().toString().substring(23, 28);
-            //            temp.length()/2
-            canvas.drawText(temp, (su.getWidth() / 2) - 100, 50, cPaint);
+            //상단 날짜 표시
+            canvas.drawText(date, (su.getWidth() / 2) - 100, 50, cPaint);
 
             //시간 표시
             for (int i = 0; i < 25; i++) {
@@ -236,7 +193,5 @@ public class DrawingView extends View{
             canvas.drawText("diaper", 40, 20 + (h_unit * 3), textPaint);
             canvas.drawText("milk", 40, 20 + (h_unit * 4), textPaint);
 
-
-
-    }
+        }
 }

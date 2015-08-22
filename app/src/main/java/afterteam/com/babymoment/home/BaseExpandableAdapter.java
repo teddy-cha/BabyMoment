@@ -1,14 +1,15 @@
 package afterteam.com.babymoment.home;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.model.Action;
@@ -50,11 +51,11 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 
 	// 그룹뷰 각각의 ROW 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded,
-			View convertView, ViewGroup parent) {
+	public View getGroupView(final int groupPosition, final boolean isExpanded,
+			View convertView, final ViewGroup parent) {
 		
 		View v = convertView;
-		
+
 		if (v == null) {
 			viewHolder = new ViewHolder();
 			v = inflater.inflate(R.layout.layout_home_expendablelist, parent, false);
@@ -65,17 +66,30 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 			viewHolder.tv_groupSumFeed = (TextView) v.findViewById(R.id.tv_sum_feed);
 
 			viewHolder.iv_image = (ImageView) v.findViewById(R.id.iv_image);
-			v.setTag(viewHolder);
+            v.setTag(viewHolder);
+
 		} else {
 			viewHolder = (ViewHolder)v.getTag();
 		}
-		
-		// 그룹을 펼칠때와 닫을때 아이콘을 변경해 준다.
-		if (isExpanded) {
-			viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_down);
-		} else {
-			viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_left_white);
-		}
+
+        // 그룹을 펼칠때와 닫을때 아이콘을 변경해 준다.
+        if (isExpanded) {
+            viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_down);
+        } else {
+            viewHolder.iv_image.setImageResource(R.drawable.icon_accodion_arrow_left_white);
+        }
+
+        // group별 graph 연결 위해 ImageView에 클릭리스너로 expandable 설정(혜연)
+        viewHolder.iv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isExpanded) {
+                    ((ExpandableListView)parent).collapseGroup(groupPosition);
+                } else {
+                    ((ExpandableListView)parent).expandGroup(groupPosition, true);
+                }
+            }
+        });
 
 		String groupTitle = getGroup(groupPosition);
 		viewHolder.tv_groupName.setText(groupTitle);
