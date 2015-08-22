@@ -56,6 +56,16 @@ public class TimeUtils {
         return simpleDateFormat.format(date);
     }
 
+    public String getStringDateTimeForGraph(Date date) {
+        simpleDateFormat = new SimpleDateFormat("HH:mm", java.util.Locale.getDefault());
+        return simpleDateFormat.format(date);
+    }
+
+    public int getIntHour(Date date) {
+        simpleDateFormat = new SimpleDateFormat("HH", java.util.Locale.getDefault());
+        return Integer.parseInt(simpleDateFormat.format(date));
+    }
+
     public Date getDate(String dateTime) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {

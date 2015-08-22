@@ -180,4 +180,28 @@ public class ActionTransaction {
     public int getNextKey() {
         return (int) realm.where(Action.class).maximumInt("action_id") + 1;
     }
+
+    public ArrayList<Action> readActionPerType(String baby_id, String date, int type) {
+
+        if (date == null) return null;
+
+        ArrayList<Action> resultArray = new ArrayList<>();
+        RealmQuery<Action> query = realm.where(Action.class);
+
+        Date targetDate = timeUtils.getDateFromStringDate(date);
+        Date nextDate = new Date(targetDate.getTime() + (1000 * 60 * 60 * 24));
+
+        query.equalTo("baby_id", baby_id).equalTo("type", type)
+                .greaterThanOrEqualTo("time", targetDate)
+                .lessThan("time", nextDate);
+
+        RealmResults<Action> results = query.findAll();
+        results.sort("time", RealmResults.SORT_ORDER_DESCENDING);
+
+        for (Action action : results) {
+            resultArray.add(action);
+        }
+
+        return resultArray;
+    }
 }

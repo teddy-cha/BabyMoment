@@ -98,16 +98,16 @@ public class BabyMomentWidget extends AppWidgetProvider{
             Log.i(TAG, "writeActionMedi");
         }
 
-//        mRunnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(context, WidgetService.class);
-//                context.startService(intent);
-//            }
-//        };
-//
-//        mHandler = new Handler();
-//        mHandler.postDelayed(mRunnable, 300);
+        mRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(context, WidgetService.class);
+                context.startService(intent);
+            }
+        };
+
+        mHandler = new Handler();
+        mHandler.postDelayed(mRunnable, 300);
 
 //        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 //        ComponentName cpName = new ComponentName(context, BabyMomentWidget.class);
