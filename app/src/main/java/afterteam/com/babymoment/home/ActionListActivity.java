@@ -22,6 +22,7 @@ import afterteam.com.babymoment.detail.DiaperActivity;
 import afterteam.com.babymoment.detail.FeedActivity;
 import afterteam.com.babymoment.detail.MedicineActivity;
 import afterteam.com.babymoment.detail.SleepActivity;
+import afterteam.com.babymoment.graph.DailyGraph;
 import afterteam.com.babymoment.model.Action;
 import afterteam.com.babymoment.model.Baby;
 import afterteam.com.babymoment.utils.TimeUtils;
@@ -45,9 +46,7 @@ public class ActionListActivity extends ActionBarActivity{
         setContentView(R.layout.layout_home_main);
 
         setLayout();
-
         setActionList();
-
     }
 
     @Override
@@ -68,6 +67,20 @@ public class ActionListActivity extends ActionBarActivity{
 
         mBaseExpandableAdapter = new BaseExpandableAdapter(this, mTitleList, mChildList);
         mListView.setAdapter(mBaseExpandableAdapter);
+
+        //graph연결을 위한 click event(혜연)
+        mListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+
+                Intent intent = new Intent(getApplicationContext(), DailyGraph.class);
+                intent.putExtra("id", baby.getBaby_id());
+                intent.putExtra("date", mBaseExpandableAdapter.getGroup(i));
+                startActivity(intent);
+                return true;
+            }
+        });
+
 
         // child click event
         mListView.setOnChildClickListener(new OnChildClickListener() {

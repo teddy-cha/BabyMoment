@@ -13,6 +13,7 @@ import java.util.Date;
 
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.db.ActionTransaction;
+import afterteam.com.babymoment.utils.ActionType;
 import afterteam.com.babymoment.utils.LogUtils;
 
 /**
@@ -35,15 +36,15 @@ public class WidgetService extends Service {
     {
         actionTransaction = new ActionTransaction(getApplicationContext());
 
-        String medicine_count = String.valueOf(actionTransaction.getTodayActionCount(1, new Date()));
-        String sleep_count = String.valueOf(actionTransaction.getTodayActionCount(2, new Date()));
-        String diaper_count = String.valueOf(actionTransaction.getTodayActionCount(3, new Date()));
-        String feed_count = String.valueOf(actionTransaction.getTodayActionCount(4, new Date()));
+        String medicine_count = String.valueOf(actionTransaction.getTodayActionCount(ActionType.MEDICINE, new Date()));
+        String sleep_count = String.valueOf(actionTransaction.getTodayActionCount(ActionType.SLEEP, new Date()));
+        String diaper_count = String.valueOf(actionTransaction.getTodayActionCount(ActionType.DIAPER, new Date()));
+        String feed_count = String.valueOf(actionTransaction.getTodayActionCount(ActionType.FEED, new Date()));
 
-        String medicine_time = String.valueOf(actionTransaction.getActionTime(1, new Date()));
-        String sleep_time = String.valueOf(actionTransaction.getActionTime(2, new Date()));
-        String diaper_time = String.valueOf(actionTransaction.getActionTime(3, new Date()));
-        String feed_time = String.valueOf(actionTransaction.getActionTime(4, new Date()));
+        String medicine_time = String.valueOf(actionTransaction.getActionTime(ActionType.MEDICINE, new Date()));
+        String sleep_time = String.valueOf(actionTransaction.getActionTime(ActionType.SLEEP, new Date()));
+        String diaper_time = String.valueOf(actionTransaction.getActionTime(ActionType.DIAPER, new Date()));
+        String feed_time = String.valueOf(actionTransaction.getActionTime(ActionType.FEED, new Date()));
 
         RemoteViews rv = new RemoteViews(getPackageName(), R.layout.layout_widget);
 
@@ -63,6 +64,11 @@ public class WidgetService extends Service {
 
         Log.i(TAG, "doUpdated");
 
+    }
+
+    @Override
+    public void onDestroy() {
+        actionTransaction.closeTransaction();
     }
 
     @Override
