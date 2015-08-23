@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Created by eunjooim on 15. 8. 12..
+ * Added by hyeyeoun on 15. 8. 22..
  */
 public class TimeUtils {
 

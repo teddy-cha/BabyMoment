@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import afterteam.com.babymoment.model.Action;
+import afterteam.com.babymoment.utils.LogUtils;
 import afterteam.com.babymoment.utils.TimeUtils;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -13,9 +14,10 @@ import io.realm.RealmResults;
 
 /**
  * Created by eunjooim on 15. 8. 12..
+ *  Modified by hyeyeoun on 15. 8. 22
  */
 public class ActionTransaction {
-
+    private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
     private Context context;
     private TimeUtils timeUtils;
     private Realm realm;
@@ -134,6 +136,7 @@ public class ActionTransaction {
                 // temporary photo index and baby
                 action[0].setPhoto("1");
                 action[0].setBaby_id(baby_id);
+
             }
         });
 
@@ -181,14 +184,14 @@ public class ActionTransaction {
         return (int) realm.where(Action.class).maximumInt("action_id") + 1;
     }
 
-    public ArrayList<Action> readActionPerType(String baby_id, String date, int type) {
+    public ArrayList<Action> readActionPerType(String baby_id, Date date, int type) {
 
         if (date == null) return null;
 
         ArrayList<Action> resultArray = new ArrayList<>();
         RealmQuery<Action> query = realm.where(Action.class);
 
-        Date targetDate = timeUtils.getDateFromStringDate(date);
+        Date targetDate = timeUtils.getDateFromStringDate(timeUtils.getStringDate(date));
         Date nextDate = new Date(targetDate.getTime() + (1000 * 60 * 60 * 24));
 
         query.equalTo("baby_id", baby_id).equalTo("type", type)

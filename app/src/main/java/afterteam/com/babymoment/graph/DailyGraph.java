@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 
+import java.util.Date;
+
 import afterteam.com.babymoment.R;
 import afterteam.com.babymoment.utils.LogUtils;
 
@@ -21,20 +23,22 @@ public class DailyGraph extends Activity {
 
     private final String TAG = LogUtils.makeTag(this.getClass().getSimpleName());
 
-    LinearLayout linear;
+    private LinearLayout linear;
     private DrawingView drawingView;
-    Window win;
-    float startPos = 0.0f;
-    float endPos = 0.0f;
+    private Window win;
+    private float startPos = 0.0f;
+    private float endPos = 0.0f;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
         String baby_id = intent.getStringExtra("id");
-        String date = intent.getStringExtra("date");
+        String title = intent.getStringExtra("title");
+        Date date = (Date)intent.getSerializableExtra("time");
+        Log.i(TAG, baby_id + "title: " + title + "date: " + date);
 
-        drawingView = new DrawingView(this,baby_id, date);
+        drawingView = new DrawingView(this, baby_id, title, date);
         win = getWindow();
 
         linear = (LinearLayout) findViewById(R.id.linear);

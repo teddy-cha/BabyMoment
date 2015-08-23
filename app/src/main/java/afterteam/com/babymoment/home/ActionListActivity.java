@@ -3,6 +3,7 @@ package afterteam.com.babymoment.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,8 +27,10 @@ import afterteam.com.babymoment.graph.DailyGraph;
 import afterteam.com.babymoment.model.Action;
 import afterteam.com.babymoment.model.Baby;
 import afterteam.com.babymoment.utils.TimeUtils;
-
-
+/*
+* Created by eunjoo Im on 15.
+* Modified by hyeyeoun on 15. 8. 22
+*/
 public class ActionListActivity extends ActionBarActivity{
 
     private ArrayList<String> mDateList;
@@ -75,7 +78,8 @@ public class ActionListActivity extends ActionBarActivity{
 
                 Intent intent = new Intent(getApplicationContext(), DailyGraph.class);
                 intent.putExtra("id", baby.getBaby_id());
-                intent.putExtra("date", mBaseExpandableAdapter.getGroup(i));
+                intent.putExtra("title", mBaseExpandableAdapter.getGroup(i));
+                intent.putExtra("time", mBaseExpandableAdapter.getChild(i, 0).getTime());
                 startActivity(intent);
                 return true;
             }
@@ -186,7 +190,7 @@ public class ActionListActivity extends ActionBarActivity{
 
                 //int id, int type, int count, String time, String detail, String photo
                 Action action = actionTransaction.writeAction(baby.getBaby_id(), type, new Date(), "");
-
+                Log.i("test", new Date().toString());
                 ArrayList<String> updated = mTitleList.get(0);
                 updated.set(action.getType(), String.valueOf(action.getCount()));
                 mTitleList.set(0, updated);
